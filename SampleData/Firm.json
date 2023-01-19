@@ -1,0 +1,32 @@
+{
+    "status": "OK",
+    "code": 200,
+    "total": 10,
+    "data": [
+        {
+            "ID": 1,
+            "CompanyName": "Aufderhar-Koch",
+            "Address": "181 Fahey Freeway"
+        },
+        {
+            "ID": 2,
+            "CompanyName": "Hoeger Inc",
+            "Address": "82808 Botsford Inlet Apt. 713"
+        },
+        {
+            "ID": 3,
+            "CompanyName": "Von-Sipes",
+            "Address": "3485 Brook Mills Suite 218"
+        },
+        {
+            "ID": 4,
+            "CompanyName": "Runolfsdottir-Keeling",
+            "Address": "9563 Ena Center"
+        },
+        {
+            "ID": 5,
+            "CompanyName": "Nikolaus-Lemke",
+            "Address": "4606 Chelsea Inlet"
+        }
+    ]
+}

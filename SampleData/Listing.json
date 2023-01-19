@@ -1,0 +1,67 @@
+{
+    "status": "OK",
+    "code": 200,
+    "total": 10,
+    "data": [
+        {
+            "ListingID": 1,
+            "Price": 87,
+            "EmployeeAssignDate": "2004-11-27",
+            "CloseDate": "2005-02-20",
+            "PostDate": "2003-12-05",
+            "Address": "999 Ramona Spurs",
+            "state": true
+	    "EmployeeID": 6
+        },
+        {
+            "ListingID": 2,
+            "Price": 2526559,
+            "EmployeeAssignDate": "1989-05-19",
+            "CloseDate": "1989-06-23",
+            "PostDate": "1988-09-04",
+            "Address": "4128 Ramiro Mews",
+            "state": false
+	    "EmployeeID": 7
+        },
+        {
+            "ListingID": 3,
+            "Price": 377,
+            "EmployeeAssignDate": "2019-09-14",
+            "CloseDate": null,
+            "PostDate": 2019-05-22",
+            "Address": "2504 Brielle Prairie",
+            "state": true
+	    "EmployeeID": 7
+        },
+        {
+            "ListingID": 4,
+            "Price": 3564,
+            "EmployeeAssignDate": "2020-06-04",
+            "CloseDate": null,
+            "PostDate": 2020-05-21",
+            "Address": "52075 Sanford Square",
+            "state": true
+	    "EmployeeID": 8
+        },
+        {
+            "ListingID": 5,
+            "Price": 7510,
+            "EmployeeAssignDate": "1999-07-12",
+            "CloseDate": "2000-01-05",
+            "PostDate": "1999-05-30",
+            "Address": "305 Stanton Pines Suite 597",
+            "state": false
+	    "EmployeeID": 9
+        },
+        {
+            "ListingID": 6,
+            "Price": 31652674,
+            "EmployeeAssignDate": "2016-03-16",
+            "CloseDate": "2015-11-17",
+            "PostDate": 2015-10-09",
+            "Address": "6449 Torphy Pass Suite 175",
+            "state": false
+	    "EmployeeID": 10
+        }
+    ]
+}

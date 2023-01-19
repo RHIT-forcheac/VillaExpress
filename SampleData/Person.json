@@ -1,0 +1,57 @@
+{
+    "status": "OK",
+    "code": 200,
+    "total": 10,
+    "data": [
+        {
+            "ID": 1,
+            "Name": "Lysanne Lowe",
+            "DateOfBirth": "2006-12-04"
+        },
+        {
+            "ID": 2,
+            "Name": "Marcellus Balistreri",
+            "DateOfBirth": "2020-12-24"
+        },
+        {
+            "ID": 3,
+            "Name": "Akeem Hahn",
+            "DateOfBirth": "2021-09-20"
+        },
+        {
+            "ID": 4,
+            "Name": "Wilmer Bednar",
+            "DateOfBirth": "1993-10-26"
+        },
+        {
+            "ID": 5,
+            "Name": "Nasir Jenkins",
+            "DateOfBirth": "1973-09-30"
+        },
+        {
+            "ID": 6,
+            "Name": "Emerson McDermott",
+            "DateOfBirth": "1990-07-09"
+        },
+        {
+            "ID": 7,
+            "Name": "Jarred Reinger",
+            "DateOfBirth": "1996-12-27"
+        },
+        {
+            "ID": 8,
+            "Name": "Jonatan Hintz",
+            "DateOfBirth": "1990-02-18"
+        },
+        {
+            "ID": 9,
+            "Name": "Modesto Murphy",
+            "DateOfBirth": "2013-04-17"
+        },
+        {
+            "ID": 10,
+            "Name": "Luigi Purdy",
+            "DateOfBirth": "1989-09-14"
+        }
+    ]
+}

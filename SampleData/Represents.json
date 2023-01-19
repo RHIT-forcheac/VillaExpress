@@ -1,0 +1,27 @@
+{
+    "status": "OK",
+    "code": 200,
+    "total": 10,
+    "data": [
+        {
+            "Client": 1,
+            "Employee": 6
+        },
+        {
+            "Client": 2,
+            "Employee": 7
+        },
+        {
+            "Client": 3,
+            "Employee": 8
+        },
+        {
+            "Client": 4,
+            "Employee": 9
+        },
+        {
+            "Client": 5,
+            "Employee": 10
+        }
+    ]
+}

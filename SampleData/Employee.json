@@ -1,0 +1,42 @@
+{
+    "status": "OK",
+    "code": 200,
+    "total": 10,
+    "data": [
+        {
+            "EmployeeID": 6,
+            "Username": "Excadrill",
+            "Password": "quasi",
+            "AdminAcess": false
+	    "AssociatedFirm": 1
+        },
+        {
+            "EmployeeID": 7,
+            "Username": "Mew",
+            "Password": "sit",
+            "AdminAcess": false
+	    "AssociatedFirm": 2
+        },
+        {
+            "EmployeeID": 8,
+            "Username": "Joltik",
+            "Password": "voluptates",
+            "AdminAcess": false
+	    "AssociatedFirm": 3
+        },
+        {
+            "EmployeeID": 9,
+            "Username": "Shiinotic",
+            "Password": "explicabo",
+            "AdminAcess": false
+	    "AssociatedFirm": 4
+        },
+        {
+            "EmployeeID": 10,
+            "Username": "Ivysaur",
+            "Password": "quidem",
+            "AdminAcess": true
+	    "AssociatedFirm": 5
+        }
+    ]
+}
