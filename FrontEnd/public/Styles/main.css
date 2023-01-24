@@ -1,0 +1,30 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#navBar {
+    background-color: #4C6085;
+}
+
+.nav-tabs .nav-link {
+    border-bottom: 0.214rem solid transparent;
+    color: white;
+} 
+
+.row {
+    margin-bottom: 15px;
+}
+
+#villaLogo {
+    height: 50px;
+    width: 50px;
+}
