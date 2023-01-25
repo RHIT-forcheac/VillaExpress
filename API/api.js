@@ -48,8 +48,15 @@ router.use((request, response, next) => {
 
   router.route('/client').post((request, response) => {
     let clientJson = request.body;
-    Db.addClient(clientJson.fname, clientJson.lname, clientJson.dob,
-       clientJson.phoneNumber, clientJson.address, clientJson.email, clientJson.active)
+    Db.addClient(clientJson.FName, clientJson.LName, clientJson.DateOfBirth,
+       clientJson.PhoneNumber, clientJson.Address, clientJson.Email, clientJson.Active)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/client').get((request, response) => {
+    Db.getClients()
     .then((data) => {
       response.json(data[0]);
     })

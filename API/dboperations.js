@@ -26,6 +26,17 @@ const bcrypt = require('bcrypt');
 //     }
 // }
 
+async function getClients() {
+    try {
+        let pool = await sql.connect(config);
+        let newClientsList = await pool.request()
+            .execute('getClients');
+        return newClientsList.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 async function registerNewUser(username, password) {
     try {
         var salt = getNewSalt();
@@ -59,6 +70,7 @@ async function loginUser(username, password) {
 
 async function addClient(fName, lName, dob, phoneNumber, address, email, active) {
     try {
+        console.log("dob", dob);
         let pool = await sql.connect(config);
         let newClient = await pool.request()
             .input('fname', sql.VarChar, fName)
@@ -87,4 +99,5 @@ module.exports = {
     registerNewUser: registerNewUser,
     loginUser: loginUser,
     addClient: addClient,
+    getClients: getClients,
 }
