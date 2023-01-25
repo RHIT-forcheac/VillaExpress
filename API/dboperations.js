@@ -4,27 +4,27 @@ const bcrypt = require('bcrypt');
 
 
 //get all employees
-async function getEmployees() {
-    try {
-        let pool = await sql.connect(config);
-        let employees = await pool.request().query("SELECT * from Employee");
-        return employees.recordsets;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// async function getEmployees() {
+//     try {
+//         let pool = await sql.connect(config);
+//         let employees = await pool.request().query("SELECT * from Employee");
+//         return employees.recordsets;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
-async function getEmployeeByUsername(username) {
-    try {
-        let pool = await sql.connect(config);
-        let employee = await pool.request()
-            .input('input_parameter', sql.Int, username)
-            .query("SELECT * from Employee where Username = @input_parameter");
-        return employee.recordsets;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// async function getEmployeeByUsername(username) {
+//     try {
+//         let pool = await sql.connect(config);
+//         let employee = await pool.request()
+//             .input('input_parameter', sql.Int, username)
+//             .query("SELECT * from Employee where Username = @input_parameter");
+//         return employee.recordsets;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 async function registerNewUser(username, password) {
     try {
@@ -43,35 +43,8 @@ async function registerNewUser(username, password) {
     }
 }
 
-async function getSaltFromUsername(username) {
-    try {
-        let pool = await sql.connect(config);
-        let employeeSalt = await pool.request()
-            .input('Username', sql.NVarChar, username)
-            .output('result', sql.VarChar(60))
-            .execute('getSaltFromUsername');
-        return employeeSalt.output.result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-async function getHashFromUsername(username) {
-    try {
-        let pool = await sql.connect(config);
-        let employeeHash = await pool.request()
-            .input('Username', sql.NVarChar, username)
-            .output('result', sql.VarChar(60))
-            .execute('getHashFromUsername');
-        return employeeHash.output.result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 async function loginUser(username, password) {
     try {
-        const dbSalt = await getSaltFromUsername(username);
         let pool = await sql.connect(config);
         let loginStatus = await pool.request()
             .input('username', sql.VarChar, username)
@@ -84,6 +57,24 @@ async function loginUser(username, password) {
     }
 }
 
+async function addClient(fName, lName, dob, phoneNumber, address, email, active) {
+    try {
+        let pool = await sql.connect(config);
+        let newClient = await pool.request()
+            .input('fname', sql.VarChar, fName)
+            .input('lname', sql.VarChar, lName)
+            .input('dob', sql.Date, dob)
+            .input('phoneNumber', sql.Char, phoneNumber)
+            .input('address', sql.VarChar, address)
+            .input('email', sql.VarChar, email)
+            .input('active', sql.Bit, active)
+            .execute('addClient');
+        return newClient.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 function getNewSalt() {
     return bcrypt.genSaltSync(10);;
 }
@@ -93,8 +84,7 @@ function hashPassword(password, salt) {
 }
 
 module.exports = {
-    getEmployees: getEmployees,
-    getEmployeeByUsername: getEmployeeByUsername,
     registerNewUser: registerNewUser,
     loginUser: loginUser,
+    addClient: addClient,
 }

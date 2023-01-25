@@ -1,8 +1,9 @@
 var rhit = rhit || {};
 
-import {loginUser, registerUser} from "./apiFunctions.js"
+import {loginUser, registerUser, addClient} from "./apiFunctions.js"
 
 rhit.loginRegesterManager = null;
+rhit.clientManager = null;
 
 rhit.LoginPageController = class {
 	constructor () {
@@ -44,10 +45,52 @@ rhit.LoginPageController = class {
 		};
 }
 
+rhit.ClientPageController = class {
+	constructor () {
+		document.querySelector("#submitAddClient").onclick = (event) => {
+			const addressJson = {
+				streetAddress: document.querySelector("#inputStreetAddress").value,
+				city: document.querySelector("#inputCity").value,
+				state: document.querySelector("#inputState").value,
+				zip: document.querySelector("#inputZip").value,
+			}
+			const addressStr = `${addressJson.streetAddress}, ${addressJson.city}, ${addressJson.state}, ${addressJson.zip}`
+			const inputJson = {
+				fname: document.querySelector("#inputFirstName").value,
+				lname: document.querySelector("#inputLastName").value,
+				dob: document.querySelector("#inputDateOfBirth").value,
+				phoneNumber: document.querySelector("#inputPhoneNumber").value,
+				address: addressStr,
+				email: document.querySelector("#inputEmail").value,
+				active: document.querySelector("#inputClientActive").value,
+			}
+
+			rhit.clientManager.addClient(inputJson);
+		};
+	}
+
+	updateView() {
+
+	}
+}
+
+rhit.ClientManager = class {
+	constructor() {
+
+	}
+
+	addClient = async function (clientJson) {
+		const addClientStatus = await addClient(clientJson);
+		console.log("client add status: ", addClientStatus);
+	};	
+}
+
 rhit.main = function () {
 	console.log("Ready");
-	rhit.loginRegesterManager = new rhit.LoginRegisterManager();
-	new rhit.LoginPageController();
+	// rhit.loginRegesterManager = new rhit.LoginRegisterManager();
+	// new rhit.LoginPageController();
+	rhit.clientManager = new rhit.ClientManager();
+	new rhit.ClientPageController();
 };
 
 rhit.main();

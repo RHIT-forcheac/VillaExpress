@@ -1,5 +1,6 @@
 var  Db = require('./dboperations');
 var  Employee = require('./employee');
+var  Client = require('./client');
 var  express = require('express');
 var  bodyParser = require('body-parser');
 var  cors = require('cors');
@@ -41,6 +42,15 @@ router.use((request, response, next) => {
 
   router.route('/employee/:username:password').post((request, response) => {
     Db.registerNewUser(request.params.username, request.params.password).then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/client').post((request, response) => {
+    let clientJson = request.body;
+    Db.addClient(clientJson.fname, clientJson.lname, clientJson.dob,
+       clientJson.phoneNumber, clientJson.address, clientJson.email, clientJson.active)
+    .then((data) => {
       response.json(data[0]);
     })
   })
