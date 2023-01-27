@@ -29,6 +29,19 @@ export async function addClient(clientJson) {
     return myJson
 }
 
+export async function updateClient(clientJson) {
+    const response = await fetch(`http://localhost:8090/api/client`, {
+        method: 'PUT',
+        headers: {
+            'Accept': '/*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(clientJson),
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
 export async function deleteClient(clientID) {
     const response = await fetch(`http://localhost:8090/api/client/${clientID}`, {
         method: 'DELETE',
