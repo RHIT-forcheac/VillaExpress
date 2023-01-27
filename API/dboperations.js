@@ -37,6 +37,18 @@ async function getClients() {
     }
 }
 
+async function deleteClient(clientID) {
+    try {
+        let pool = await sql.connect(config);
+        let clientDeleted = await pool.request()
+            .input('clientID', sql.Int, clientID)
+            .execute('deleteClient');
+        return clientDeleted.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 async function registerNewUser(username, password) {
     try {
         var salt = getNewSalt();
@@ -100,4 +112,5 @@ module.exports = {
     loginUser: loginUser,
     addClient: addClient,
     getClients: getClients,
+    deleteClient: deleteClient,
 }

@@ -61,3 +61,10 @@ router.use((request, response, next) => {
       response.json(data[0]);
     })
   })
+
+  router.route('/client/:clientID').delete((request, response) => {
+    Db.deleteClient(request.params.clientID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })

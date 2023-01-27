@@ -4,7 +4,8 @@ import {
 	loginUser,
 	registerUser,
 	addClient,
-	getClients
+	getClients,
+	deleteClient,
 } from "./apiFunctions.js"
 
 rhit.loginRegesterManager = null;
@@ -142,6 +143,7 @@ rhit.ClientManager = class {
 		var columns = this.addAllColumnHeaders(clientsJson, selector);
 		for (var i = 0; i < clientsJson.length; i++) {
 			var row$ = $('<tr/>', {
+				id: `row${i}`,
 				style: "display:none"
 			});
 			clientsJson[i].DateOfBirth = clientsJson[i].DateOfBirth.toString().substring(0, clientsJson[i].DateOfBirth.indexOf('T'));
@@ -170,6 +172,36 @@ rhit.ClientManager = class {
 						row$.append($('<td/>').html(cellValue));
 				}
 			}
+			row$.data('index', i);
+			let editButton = $('<td/>').html(`<button id="clientEditBtn${i}" class="tblColCont clientEditBtn" type="button">
+			<span id="editIcon" class="material-symbols-outlined">edit</span></button>`);
+			let deleteButton = $('<td/>').html(`<button id="clientDeleteBtn${i}" class="tblColCont clientDeleteBtn" type="button">
+			<span id="deleteIcon" class="material-symbols-outlined">delete</span></button>`);
+
+			editButton.on("click", function() {
+				let rowIndex = $(editButton).parent().data('index');   // jQuery
+				let currentClient = clientsJson[rowIndex];
+				let clientId = currentClient.ClientID;
+				console.log(rowIndex);
+				console.log(currentClient);
+				console.log(clientId);
+				// this.editClientInfo(index);
+				console.log("editing client");
+			})
+
+			deleteButton.on("click", function() {
+				let rowIndex = $(editButton).parent().data('index');   // jQuery
+				let currentClient = clientsJson[rowIndex];
+				let clientId = currentClient.ClientID;
+				console.log(rowIndex);
+				console.log(currentClient);
+				console.log(clientId);
+				deleteClient(clientId);
+				console.log("deleting client");
+			})
+
+			row$.append(editButton);
+			row$.append(deleteButton);
 			$(selector).append(row$);
 		}
 	}
@@ -218,6 +250,14 @@ rhit.ClientManager = class {
 			this.targetConfirmedPage = this.targetPage;
 		}
 	};
+
+	editClientInfo() {
+
+	}
+
+	// deleteClient(clientID) {
+	// 	deleteClient(clientID);
+	// }
 }
 
 rhit.main = function () {

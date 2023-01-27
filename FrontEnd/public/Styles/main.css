@@ -98,7 +98,19 @@ body {
     border-bottom: 2px solid rgba(0,0,0,.06);
 }
 
-#idHeader, #firstHeader, #lastHeader, #dobHeader, #emailHeader, #phoneHeader, #addressHeader, #activeHeader {
+#idHeader, #firstHeader, #lastHeader, #dobHeader, #emailHeader, #phoneHeader, #addressHeader, #activeHeader, #editHeader, #deleteHeader  {
     padding-bottom: 0;
+}
+
+#clientEditBtn {
+    color: white;
+}
+
+#editIcon, .clientEditBtn {
+    background-color: #36454F;
+}
+
+#deleteIcon, .clientDeleteBtn {
+    background-color: red;
 }
 
