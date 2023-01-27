@@ -104,3 +104,12 @@ router.use((request, response, next) => {
       response.json(data[0]);
     })
   })
+
+  router.route('/client').put((request, response) => {
+    let clientJson = request.body;
+    Db.updateClient(clientJson.ClientID, clientJson.FName, clientJson.LName, clientJson.DateOfBirth,
+       clientJson.PhoneNumber, clientJson.Address, clientJson.Email, clientJson.Active)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })

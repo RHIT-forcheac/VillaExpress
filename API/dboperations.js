@@ -99,6 +99,25 @@ async function addClient(fName, lName, dob, phoneNumber, address, email, active)
     }
 }
 
+async function updateClient(clientID, fName, lName, dob, phoneNumber, address, email, active) {
+    try {
+        let pool = await sql.connect(config);
+        let newClient = await pool.request()
+            .input('clientID', sql.Int, clientID)
+            .input('fname', sql.VarChar, fName)
+            .input('lname', sql.VarChar, lName)
+            .input('dob', sql.Date, dob)
+            .input('phoneNumber', sql.Char, phoneNumber)
+            .input('address', sql.VarChar, address)
+            .input('email', sql.VarChar, email)
+            .input('active', sql.Bit, active)
+            .execute('updateClient');
+        return newClient.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 function getNewSalt() {
     return bcrypt.genSaltSync(10);;
 }
@@ -180,4 +199,5 @@ module.exports = {
     getFirm: getFirm,
     addEmployeeToFirm: addEmployeeToFirm,
     checkAdminAccess: checkAdminAccess,
+    updateClient: updateClient,
 }

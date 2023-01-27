@@ -284,6 +284,90 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editClientDialogue" data-client="" tabindex="-1" role="dialog" aria-labelledby="Add quote dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Client</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="inputNewFirstName">First Name</label>
+                                <input type="text" class="form-control" id="inputNewFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputNewLastName">Last Name</label>
+                                <input type="text" class="form-control" id="inputNewLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="inputNewEmail">Email</label>
+                                <input type="email" class="form-control" id="inputNewEmail" placeholder="Email">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputNewDateOfBirth">Date of Birth</label>
+                                <input type="date" class="form-control" id="inputNewDateOfBirth">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="inputNewPhoneNumber">PhoneNumber</label>
+                                <input type="text" class="form-control" id="inputNewPhoneNumber" placeholder="Phone #">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7">
+                                <label for="inputNewStreetAddress">Street Address</label>
+                                <input type="text" class="form-control" id="inputNewStreetAddress"
+                                    placeholder="Street address">
+                            </div>
+                            <div class="form-group col-5">
+                                <label for="inputNewCity">City</label>
+                                <input type="text" class="form-control" id="inputNewCity">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-2">
+                                <label for="inputNewState">State</label>
+                                <select id="inputNewState" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Indiana</option>
+                                    <option>Ohio</option>
+                                    <option>Michigan</option>
+                                    <option>Illinois</option>
+                                    <option>Kentucky</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputNewZip">Zip</label>
+                                <input type="text" class="form-control" id="inputNewZip">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="inputNewClientActive">
+                                    <label class="form-check-label" for="inputNewClientActive">
+                                        Active Client
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="submitEditClient" type="button" class="btn btn-primary" data-dismiss="modal">Edit
+                        Client</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/popper.js"></script>
     <script src="scripts/bootstrap-material-design.js"></script>

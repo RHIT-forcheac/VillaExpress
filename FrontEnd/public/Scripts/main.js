@@ -6,6 +6,7 @@ import {
 	addClient,
 	getClients,
 	deleteClient,
+	updateClient,
 	addFirm, 
 	getFirm, 
 	deleteFirm, 
@@ -85,6 +86,31 @@ rhit.ClientPageController = class {
 			rhit.clientManager.addClient(inputJson);
 			this.updateView();
 		};
+
+		document.querySelector("#submitEditClient").onclick = (event) => {
+			let clientID = document.querySelector("#editClientDialogue").getAttribute("data-clientID");
+			const addressJson = {
+				streetAddress: document.querySelector("#inputNewStreetAddress").value,
+				city: document.querySelector("#inputNewCity").value,
+				state: document.querySelector("#inputNewState").value,
+				zip: document.querySelector("#inputNewZip").value,
+			}
+			const addressStr = `${addressJson.streetAddress}, ${addressJson.city}, ${addressJson.state}, ${addressJson.zip}`
+			const inputJson = {
+				ClientID: parseInt(clientID),
+				FName: document.querySelector("#inputNewFirstName").value,
+				LName: document.querySelector("#inputNewLastName").value,
+				DateOfBirth: document.querySelector("#inputNewDateOfBirth").value,
+				PhoneNumber: document.querySelector("#inputNewPhoneNumber").value,
+				Address: addressStr,
+				Email: document.querySelector("#inputNewEmail").value,
+				Active: document.querySelector("#inputNewClientActive").value,
+			}
+			console.log(inputJson);
+			rhit.clientManager.editClientInfo(inputJson);
+			this.updateView();
+		};
+
 		document.querySelector("#beginningPage").onclick = (event) => {
 			rhit.clientManager.targetPage = this.startPage;
 			this.updateView();
@@ -179,7 +205,8 @@ rhit.ClientManager = class {
 				}
 			}
 			row$.data('index', i);
-			let editButton = $('<td/>').html(`<button id="clientEditBtn${i}" class="tblColCont clientEditBtn" type="button">
+			let editButton = $('<td/>').html(`<button id="clientEditBtn${i}" class="tblColCont clientEditBtn" type="button" data-toggle="modal"
+			data-target="#editClientDialogue">
 			<span id="editIcon" class="material-symbols-outlined">edit</span></button>`);
 			let deleteButton = $('<td/>').html(`<button id="clientDeleteBtn${i}" class="tblColCont clientDeleteBtn" type="button">
 			<span id="deleteIcon" class="material-symbols-outlined">delete</span></button>`);
@@ -187,11 +214,19 @@ rhit.ClientManager = class {
 			editButton.on("click", function() {
 				let rowIndex = $(editButton).parent().data('index');   // jQuery
 				let currentClient = clientsJson[rowIndex];
-				let clientId = currentClient.ClientID;
-				console.log(rowIndex);
-				console.log(currentClient);
-				console.log(clientId);
-				// this.editClientInfo(index);
+				let modal = document.querySelector("#editClientDialogue")
+				modal.setAttribute("data-clientID", currentClient.ClientID)
+				let fullAddressArr = currentClient.Address.split(',');
+				document.querySelector("#inputNewStreetAddress").value = fullAddressArr[0];
+				document.querySelector("#inputNewCity").value = fullAddressArr[1];
+				document.querySelector("#inputNewState").value = fullAddressArr[2];
+				document.querySelector("#inputNewZip").value = fullAddressArr[3];
+				document.querySelector("#inputNewFirstName").value = currentClient.FName;
+				document.querySelector("#inputNewLastName").value = currentClient.LName;
+				document.querySelector("#inputNewDateOfBirth").value = currentClient.DateOfBirth;
+				document.querySelector("#inputNewPhoneNumber").value = currentClient.PhoneNumber;
+				document.querySelector("#inputNewEmail").value = currentClient.Email;
+				document.querySelector("#inputNewClientActive").value = currentClient.Active;
 				console.log("editing client");
 			})
 
@@ -257,8 +292,8 @@ rhit.ClientManager = class {
 		}
 	};
 
-	editClientInfo() {
-
+	editClientInfo(clientJson) {
+		updateClient(clientJson)
 	}
 
 	// deleteClient(clientID) {
