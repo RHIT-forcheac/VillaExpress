@@ -75,3 +75,33 @@ export async function getListings() {
     const myJson = await response.json();
     return myJson
 }
+
+export async function addFirm(firmJSON) {
+    const response = await fetch(`http://localhost:8090/api/firm`, {
+        method: 'POST',
+        headers: {
+            'Accept': '/*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(listingJSON),
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
+export async function deleteFirm(firmID) {
+    const response = await fetch(`http://localhost:8090/api/firm/${firmID}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': '/*',
+        },
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
+export async function getFirms() {
+    const response = await fetch(`http://localhost:8090/api/firm`);
+    const myJson = await response.json();
+    return myJson
+}
