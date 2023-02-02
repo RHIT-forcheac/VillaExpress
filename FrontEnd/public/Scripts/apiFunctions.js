@@ -45,3 +45,33 @@ export async function getClients() {
     const myJson = await response.json();
     return myJson
 }
+
+export async function addListing(listingJSON) {
+    const response = await fetch(`http://localhost:8090/api/listing`, {
+        method: 'POST',
+        headers: {
+            'Accept': '/*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(listingJSON),
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
+export async function deleteListing(listingID) {
+    const response = await fetch(`http://localhost:8090/api/listing/${listingID}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': '/*',
+        },
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
+export async function getListings() {
+    const response = await fetch(`http://localhost:8090/api/listing`);
+    const myJson = await response.json();
+    return myJson
+}
