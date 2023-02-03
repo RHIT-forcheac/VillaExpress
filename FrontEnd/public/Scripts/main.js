@@ -304,7 +304,7 @@ rhit.ListingPageController = class {
 	}
 
 	updateView() {
-		rhit.listingPageManager.getListings();
+		rhit.listingPageManager.populateListings();
 	}
 }
 
@@ -315,15 +315,85 @@ rhit.ListingPageManager = class {
 
 	getListings = async function() {
 		const listingsJson = await getListings();
+		return listingsJson;
+	}
+
+	createCard = function(currentRow, currentListing) {
+		const newCol = document.createElement("div");
+		newCol.className = "col";
+
+		const newCard = document.createElement("div");
+		newCard.className = "card";
+		newCard.style = "width: 18rem;";
+
+		const newImage = document.createElement("img");
+		newImage.className = "card-img-top";
+		newImage.src = "Insert source when populated in db";
+		newImage.alt = "House image will go here";
+
+		const newCardBody = document.createElement("div");
+		newCardBody.className = "card-body";
+
+		const newAddress = document.createElement("h5");
+		newAddress.className = "card-title";
+		newAddress.innerHTML = currentListing.address;
+
+		const newDescription = document.createElement("p");
+		newDescription.innerText = "Description of the lovely home";
+
+		const newDetailsButton = document.createElement("a");
+		newDetailsButton.href = "#";
+		newDetailsButton.className = "btn btn-primary";
+		newDetailsButton.innerHTML = "Details";
+
+		const newOffersButton = document.createElement("button");
+		newOffersButton.type = "button";
+		newOffersButton.className = "btn btn-primary";
+		newOffersButton.innerHTML = "Offers"
+
+		const newIconCounter = document.createElement("span");
+		newIconCounter.className = "badge badge-pill badge-success";
+		//TODO: implement offers and replace with actual number
+		newIconCounter.innerHTML = "4"
+
+		newOffersButton.appendChild(newIconCounter);
+		newCardBody.appendChild(newAddress);
+		newCardBody.appendChild(newDescription);
+		newCardBody.appendChild(newDetailsButton);
+		newCardBody.appendChild(newOffersButton);
+		newCard.appendChild(newImage);
+		newCard.appendChild(newCardBody);
+		newCol.appendChild(newCard);
+		currentRow.appendChild(newCol);
+	}
+	
+	//TODO: Create new row for every 3 cards
+	createNewRow = function() {
+		const newRow = document.createElement("div");
+		newRow.className = "row";
+		const element = document.getElementById("mainPage");
+		element.appendChild(newRow);
+		return newRow;
+	}
+
+	populateListings = async function() {
+		const listingsJson = await this.getListings();
 		console.log(listingsJson);
-	}
-
-	createCard = function() {
-
-	}
-
-	populateListings = function() {
-
+		const listingsCount = listingsJson.length;
+		//console.log("#of listings", listingsCount);
+		const numOfRows = Math.ceil(listingsCount/3);
+		//console.log("# of rows", numOfRows);
+		//loop for num of rows
+		for (let i = 0; i < numOfRows; i ++){
+			const newRow = this.createNewRow();
+			//console.log(newRow);
+			//TODO: Add up to three cards per row
+			//3 because limit is 3 cards per row
+			for (let j = 0; j < 3; j++){
+				const currentListing = listingsJson.shift()
+				this.createCard(newRow, currentListing);
+			}
+		}
 	}
 
 }

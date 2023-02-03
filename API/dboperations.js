@@ -171,11 +171,8 @@ module.exports = {
     addClient: addClient,
     getClients: getClients,
     deleteClient: deleteClient,
-<<<<<<< HEAD
     updateClient: updateClient,
-=======
     addListing: addListing,
     getListings: getListings, 
     deleteListing: deleteListing,
->>>>>>> listingPage
 }
