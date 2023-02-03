@@ -1,6 +1,8 @@
 var  Db = require('./dboperations');
 var  Employee = require('./employee');
 var  Client = require('./client');
+var Listing = require('./listing');
+var Firm = require('./firm');
 var  express = require('express');
 var  bodyParser = require('body-parser');
 var  cors = require('cors');
@@ -67,4 +69,28 @@ router.use((request, response, next) => {
     .then((data) => {
       response.json(data[0]);
     })
+  })
+
+  router.route('/listing').post((request, response) => {
+    let listingJSON = request.body;
+    Db.addListing(listingJSON.EmployeeAssignDate, listingJSON.CloseDate, listingJSON.PostDate, 
+      listingJSON.Address, listingJSON.State)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/listing').get((request, response) => {
+    Db.getListings()
+    .then((data) => {
+      response.json(data[0]);
+    })    
+  })
+
+  router.route('listing/:listingID').delete((request, response) => {
+    console.log(request.params.listingID);
+    Db.deleteListing(request.params.listingID)
+    .then((data) => {
+      response.json(data[0]);
+    })    
   })
