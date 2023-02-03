@@ -113,6 +113,45 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
             .input('active', sql.Bit, active)
             .execute('updateClient');
         return newClient.recordsets;
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function addListing(EmployeeAssignDate, CloseDate, PostDate, Address, State) {
+    try {
+        let pool = await sql.connect(config);
+        let newListing = await pool.request()
+            .input('EmployeeAssignDate', sql.Date, EmployeeAssignDate)
+            .input('CloseDate', sql.Date, CloseDate)
+            .input('PostDate', sql.Date, PostDate)
+            .input('Address', sql.VarChar, Address)
+            .input('State', sql.VarChar, State)
+            .execute('addListing');
+        return newListing.recordsets;
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function deleteListing(listingID) {
+    try {
+        let pool = await sql.connect(config);
+        let listingDeleted = await pool.request()
+            .input('listingID', sql.Int, listingID)
+            .execute('deleteListing');
+        return listingDeleted.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function getListings() {
+    try {
+        let pool = await sql.connect(config);
+        let newListingsList = await pool.request()
+            .execute('getListings');
+        return newListingsList.recordsets;
     } catch (err) {        
         console.log(err);
     }
@@ -132,5 +171,11 @@ module.exports = {
     addClient: addClient,
     getClients: getClients,
     deleteClient: deleteClient,
+<<<<<<< HEAD
     updateClient: updateClient,
+=======
+    addListing: addListing,
+    getListings: getListings, 
+    deleteListing: deleteListing,
+>>>>>>> listingPage
 }
