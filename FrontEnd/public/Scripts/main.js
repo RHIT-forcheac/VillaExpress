@@ -7,10 +7,12 @@ import {
 	getClients,
 	deleteClient,
 	updateClient,
+	getListings,
 } from "./apiFunctions.js"
 
 rhit.loginRegesterManager = null;
 rhit.clientManager = null;
+rhit.listingPageManager = null;
 
 rhit.LoginPageController = class {
 	constructor() {
@@ -295,11 +297,43 @@ rhit.ClientManager = class {
 	// }
 }
 
+rhit.ListingPageController = class {
+	constructor() {
+		rhit.listingPageManager = new rhit.ListingPageManager();
+		this.updateView();
+	}
+
+	updateView() {
+		rhit.listingPageManager.getListings();
+	}
+}
+
+rhit.ListingPageManager = class {
+	constructor() {
+
+	}
+
+	getListings = async function() {
+		const listingsJson = await getListings();
+		console.log(listingsJson);
+	}
+
+	createCard = function() {
+
+	}
+
+	populateListings = function() {
+
+	}
+
+}
+
 rhit.main = function () {
 	console.log("Ready");
 	// rhit.loginRegesterManager = new rhit.LoginRegisterManager();
 	// new rhit.LoginPageController();
-	new rhit.ClientPageController();
+	// new rhit.ClientPageController();
+	new rhit.ListingPageController();
 };
 
 rhit.main();
