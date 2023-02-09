@@ -84,6 +84,20 @@ export async function addListing(listingJSON) {
     return myJson
 }
 
+export async function addOffer(offerJson) {
+    const response = await fetch(`http://localhost:8090/api/offer`, {
+        method: 'POST',
+        headers: {
+            'Accept': '/*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(offerJson),
+    });
+    console.log(response);
+    const myJson = await response.json();
+    return myJson
+}
+
 export async function updateClient(clientJson) {
     const response = await fetch(`http://localhost:8090/api/client`, {
         method: 'PUT',
