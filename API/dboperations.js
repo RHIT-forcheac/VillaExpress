@@ -107,6 +107,20 @@ async function addListing(EmployeeAssignDate, CloseDate, PostDate, Address, Stat
     }
 }
 
+async function addOffer(price, listing, client) {
+    try {
+        let pool = await sql.connect(config);
+        let newOffer = await pool.request()
+            .input('Price', sql.Money, price)
+            .input('Listing', sql.Int, listing)
+            .input('Client', sql.Int, client)
+            .execute('addOffer');
+        return newOffer.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 async function updateClient(clientID, fName, lName, dob, phoneNumber, address, email, active) {
     try {
         let pool = await sql.connect(config);
@@ -253,10 +267,15 @@ async function checkAdminAccess(employeeID) {
 }
 
 module.exports = {
-    registerNewUser: registerNewUser,
-    loginUser: loginUser,
-    addClient: addClient,
+    getEmployeeByID: getEmployeeByID,
+    getOffersByListing: getOffersByListing,
+    getClientByID: getClientByID,
     getClients: getClients,
+    getListings: getListings, 
+    addClient: addClient,
+    addListing: addListing,
+    addOffer: addOffer,
+    updateClient: updateClient,
     deleteClient: deleteClient,
     addFirm: addFirm,
     deleteFirm: deleteFirm,
@@ -267,7 +286,6 @@ module.exports = {
     addListing: addListing,
     getListings: getListings, 
     deleteListing: deleteListing,
-    getEmployeeByID: getEmployeeByID,
-    getOffersByListing: getOffersByListing,
-    getClientByID,
+    registerNewUser: registerNewUser,
+    loginUser: loginUser,
 }
