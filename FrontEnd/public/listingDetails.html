@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <title>VillaExpress</title>
+</head>
+
+<body>
+    <ul id="navBar" class="nav nav-tabs">
+        <li class="nav-item">
+            <img id="villaLogo" src="./images/villa.png" alt="villa logo">
+          </li>
+        <li class="nav-item">
+            <button id="homePageButton" type="button" class="nav-link">VillaExpress</a>
+        </li>
+        <li class="nav-item">
+            <button id="clientsPageButton" type="button" class="nav-link">Clients</a>
+        </li>
+        <li class="nav-item">
+            <button id="listingsPageButton" type="button" class="nav-link">Listings</a>
+        </li>
+        <li class="nav-item">
+            <button id="firmPageButton" type="button" class="nav-link">Firm</a>
+        </li>
+
+    </ul>
+
+  <div id="detailPage" class="container page-container">
+
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Assigned Employee name here...</h5>
+                    <p class="card-text">Date assigned to listing here</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Listing post date here</h5>
+                    <p class="card-text">Listing status (close date, or available...)</p>
+                    <button type="button" class="btn btn-primary">
+                        Close Listing 
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Listing Address</h5>
+                    <p class="card-text">Listing desc if time</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Image of listing (or carasel here)</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>
+    $("body").bootstrapMaterialDesign();
+  </script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script type="module" src="./Scripts/main.js"></script>
+</body>
+
+</html>
