@@ -140,6 +140,21 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
     }
 }
 
+async function updateOffer(offerID, price, listing, client) {
+    try {
+        let pool = await sql.connect(config);
+        let updatedOffer = await pool.request()
+            .input('offerID', sql.Int, offerID)
+            .input('price', sql.Money, price)
+            .input('listing', sql.Int, listing)
+            .input('client', sql.Int, client)
+            .execute('updateOffer');
+        return updatedOffer.recordsets;
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 async function deleteListing(listingID) {
     try {
         let pool = await sql.connect(config);
@@ -226,6 +241,7 @@ module.exports = {
     addListing: addListing,
     addOffer: addOffer,
     updateClient: updateClient,
+    updateOffer: updateOffer, 
     deleteClient: deleteClient,
     deleteListing: deleteListing,
     deleteOffer: deleteOffer,

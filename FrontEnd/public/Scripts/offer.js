@@ -32,13 +32,14 @@ export class OfferPageController {
 		};
 
 		document.querySelector("#submitEditOffer").onclick = (event) => {
-			let listingID = document.querySelector("#editClientDialogue").getAttribute("data-clientID");
+			//let offerId = document.querySelector("#editOfferDialogue").getAttribute("data-clientID");
 			const inputJson = {
-				price: document.querySelector("#inputNewOfferValue").value,
-				client: document.querySelector("#inputNewClientID").value,
+				Price: document.querySelector("#inputNewOfferValue").value,
+                Listing: this.listingID,
+				Client: document.querySelector("#inputNewClientID").value,
 			}
             //TODO: Refactor for offer
-			//rhit.offerManager.editClientInfo(inputJson);
+			rhit.offerManager.editOfferInfo(inputJson);
 			this.updateView();
             location.reload();
 		};

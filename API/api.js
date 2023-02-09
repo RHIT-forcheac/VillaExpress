@@ -134,3 +134,11 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/offer').put((request, response) => {
+    let offerJson = request.body;
+    Db.updateOffer(offerJson.OfferID, offerJson.Price, offerJson.Listing, offerJson.Client)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
