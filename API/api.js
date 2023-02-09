@@ -81,6 +81,13 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/client/:clientID').get((request, response) => {
+    Db.getClientByID(request.params.clientID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
   router.route('/listing').post((request, response) => {
     let listingJSON = request.body;
     Db.addListing(listingJSON.EmployeeAssignDate, listingJSON.CloseDate, listingJSON.PostDate, 
@@ -112,9 +119,11 @@ router.use((request, response, next) => {
     })
   })
 
-  router.route('/client/:clientID').get((request, response) => {
-    Db.getClientByID(request.params.clientID)
+  router.route('/offer').post((request, response) => {
+    let offerJson = request.body;
+    Db.addOffer(offerJson.Price, offerJson.Listing, offerJson.Client)
     .then((data) => {
       response.json(data[0]);
     })
   })
+

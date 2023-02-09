@@ -82,7 +82,7 @@ class OfferManager {
 
 	addOffer = async function (clientJson) {
         //TODO: change addClient to offer when api function is made
-		//const addClientStatus = await addClient(clientJson);
+		const addOfferStatus = await addClient(clientJson);
 	};
 
 	getOffers = async function (listingID) {
