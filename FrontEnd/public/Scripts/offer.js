@@ -15,8 +15,6 @@ export class OfferPageController {
 		this.currPage = 1;
 		this.endPage = 0;
         this.listingID = listingID;
-        //TODO: Remove console log
-        console.log(listingID);
 		rhit.offerManager = new OfferManager();
 
 		document.querySelector("#submitAddOffer").onclick = (event) => {
@@ -30,7 +28,6 @@ export class OfferPageController {
 		};
 
 		document.querySelector("#submitEditOffer").onclick = (event) => {
-            //TODO: refactor to pass in listing ID when offer is clicked on listings page
 			let listingID = document.querySelector("#editClientDialogue").getAttribute("data-clientID");
 			const inputJson = {
 				price: document.querySelector("#inputNewOfferValue").value,
@@ -67,7 +64,6 @@ export class OfferPageController {
 	}
 
 	updateView() {
-        //TODO: Refactor update view for offer
 		rhit.offerManager.getOffers(this.listingID);
 
 		document.querySelector("#startPageTxt").innerText = 1
@@ -90,7 +86,6 @@ class OfferManager {
 	};
 
 	getOffers = async function (listingID) {
-        //TODO: change getClients to getOffers when api function is made
 		const offersListJson = await getOffersByListing(listingID);
 		let tableBody = document.querySelector("#offersTable");
 		this.jsonToTbl(offersListJson, tableBody);
@@ -113,34 +108,11 @@ class OfferManager {
 			for (var colIndex = 0; colIndex < columns.length; colIndex++) {
 				var cellValue = offersJson[i][columns[colIndex]];
 				if (cellValue == null) cellValue = "";
-				let activeClass = "";
-                //TODO: get client FName and LName from ID if it exists
 				switch (colIndex) {
 					case 0:
 						row$.append($('<th/>', {scope: "row"}).html(cellValue));
 						break;
-					case 2:
-                        //TODO: Cell value should = FName of clientID
-
-						// if (cellValue == 'T') {
-						// 	activeClass = "table-success";
-						// } else {
-						// 	activeClass = "table-danger";
-						// }
-						// row$.append($('<td/>', {class: activeClass}).html(cellValue));
-						// break;
-                    case 3:
-                        //TODO: Cell value should = LName of clientID
-
-                        // if (cellValue == 'T') {
-                        //     activeClass = "table-success";
-                        // } else {
-                        //     activeClass = "table-danger";
-                        // }
-                        // row$.append($('<td/>', {class: activeClass}).html(cellValue));
-                        // break;
 					default:
-                        //Appending offer value
 						row$.append($('<td/>').html(cellValue));
 				}
 			}
@@ -225,9 +197,9 @@ class OfferManager {
 		}
 	};
 
-	editOfferInfo(clientJson) {
+	editOfferInfo(offerJson) {
         //TODO: change to offer when api function is implemented
-		//updateClient(clientJson)
+		updateOffer(offerJson)
 	}
 
     //TODO: implement delete for offer
