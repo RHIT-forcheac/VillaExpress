@@ -2,6 +2,7 @@ var rhit = rhit || {};
 
 import {
 	getOffersByListing,
+    addOffer,
 } from "./apiFunctions.js"
 
 //TODO: Create API functions/sprocs for offers
@@ -19,11 +20,12 @@ export class OfferPageController {
 
 		document.querySelector("#submitAddOffer").onclick = (event) => {
 			const inputJson = {
-				price: document.querySelector("#inputOfferValue").value,
-				client: document.querySelector("#inputClientID").value,
+				Price: document.querySelector("#inputOfferValue").value,
+                Listing: this.listingID,
+				Client: document.querySelector("#inputClientID").value,
 			}
             //TODO: Refactor for offer
-			//rhit.clientManager.addClient(inputJson);
+			rhit.offerManager.addOffer(inputJson);
 			this.updateView();
 		};
 
@@ -80,9 +82,9 @@ class OfferManager {
 		this.pages = 0;
 	};
 
-	addOffer = async function (clientJson) {
+	addOffer = async function (offerJson) {
         //TODO: change addClient to offer when api function is made
-		const addOfferStatus = await addClient(clientJson);
+		const addOfferStatus = await addOffer(offerJson);
 	};
 
 	getOffers = async function (listingID) {
