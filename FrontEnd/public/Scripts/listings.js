@@ -1,13 +1,7 @@
 var rhit = rhit || {};
 //TODO: Add images (if time not high priority)
 //  unsplash has real estate images and an accompanying api
-//TODO: add onclicks for details
-//  similar to clients, but redirects to fixed page with a url param for lisitng id
-//  displays assigned agent, posted date, assigned date, closed or open, and everything on the card
-//  as well as the related client
-//TODO: add onclicks for offers
-//  similar to clients, but redirects to fixed page with a url param for lisitng id
-//  displays the current offers on a listing, and the client making the offer if they are in the system
+//TODO: have offers badge display number of actual offers (probably will need a new sproc)
 
 import {
 	getListings,
@@ -59,14 +53,15 @@ class ListingPageManager {
 		const newDescription = document.createElement("p");
 		newDescription.innerText = "Description of the lovely home";
 
-		const newDetailsButton = document.createElement("button");
+		let newDetailsButton = document.createElement("button");
         newDetailsButton.type = "button";
 		newDetailsButton.className = "btn btn-primary";
 		newDetailsButton.innerHTML = "Details";
 
-        // newDetailsButton.on("click", function() {
-        //     console.log("Details button clicked");
-        // })
+        newDetailsButton.onclick = ((event) => {
+            console.log("Details clicked for listing: ", currentListing.ListingID);
+            window.location.href = `../listingDetails.html?listingID=${currentListing.ListingID}`;
+        })
 
 		let newOffersButton = document.createElement("button");
 		newOffersButton.type = "button";
@@ -74,7 +69,6 @@ class ListingPageManager {
 		newOffersButton.innerHTML = "Offers"
 
         newOffersButton.onclick = ((event) => {
-            //console.log("Offers clicked for listing: ", currentListing.ListingID);
             window.location.href = `../offers.html?listingID=${currentListing.ListingID}`;
         })
 

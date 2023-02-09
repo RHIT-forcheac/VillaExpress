@@ -140,6 +140,13 @@ router.use((request, response, next) => {
     })    
   })
 
+  router.route('/listing/:listingID').get((request, response) => {
+    Db.getListingByID(request.params.listingID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
   router.route('listing/:listingID').delete((request, response) => {
     console.log(request.params.listingID);
     Db.deleteListing(request.params.listingID)

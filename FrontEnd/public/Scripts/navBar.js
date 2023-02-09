@@ -4,6 +4,7 @@ import {LoginPageController} from "./login.js";
 import {ClientPageController} from "./clients.js";
 import {ListingPageController} from "./listings.js"
 import {OfferPageController} from "./offer.js"
+import { DetailPageController } from "./listingDetails.js";
 
 rhit.navBarManager = null;
 
@@ -89,6 +90,12 @@ export function initializePage() {
 		console.log("You are on the offers page");
 		const listingID = urlParams.get("listingID");
 		new OfferPageController(listingID);
+	}
+
+	if(document.querySelector("#detailPage")){
+		console.log("You are on the details page");
+		const listingID = urlParams.get("listingID");
+		new DetailPageController(listingID);
 	}
 
 	if(document.querySelector("#loginPage")){

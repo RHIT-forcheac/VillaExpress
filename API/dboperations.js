@@ -61,6 +61,18 @@ async function getClients() {
     }
 }
 
+async function getListingByID(listingID) {
+    try {
+        let pool = await sql.connect(config);
+        let listing = await pool.request()
+            .input('ListingID', sql.Int, listingID)
+            .execute('getListingTable')
+        return listing.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function getListings() {
     try {
         let pool = await sql.connect(config);
@@ -298,6 +310,7 @@ module.exports = {
     getOffersByListing: getOffersByListing,
     getClientByID: getClientByID,
     getClients: getClients,
+    getListingByID: getListingByID,
     getListings: getListings, 
     addClient: addClient,
     addListing: addListing,
