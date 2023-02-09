@@ -93,9 +93,7 @@ export async function addOffer(offerJson) {
         },
         body: JSON.stringify(offerJson),
     });
-    console.log(response);
-    const myJson = await response.json();
-    return myJson
+    return response;
 }
 
 export async function updateClient(clientJson) {
