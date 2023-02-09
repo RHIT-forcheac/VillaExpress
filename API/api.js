@@ -3,6 +3,7 @@ var  Employee = require('./employee');
 var  Client = require('./client');
 var Listing = require('./listing');
 var Firm = require('./firm');
+var Offer = require('./offer');
 var  express = require('express');
 var  bodyParser = require('body-parser');
 var  cors = require('cors');
@@ -30,11 +31,11 @@ router.use((request, response, next) => {
 //     })
 //   })
   
-//   router.route('/employee/:username').get((request, response) => {
-//     Db.getEmployeeByUsername(request.params.username).then((data) => {
-//       response.json(data[0]);
-//     })
-//   })
+  router.route('/employee').get((request, response) => {
+    Db.getEmployeeByID(request.query.id).then((data) => {
+      response.json(data[0]);
+    })
+  })
 
   router.route('/employee/:username&:password').get((request, response) => {
     Db.loginUser(request.params.username, request.params.password).then(data  => {
@@ -102,4 +103,18 @@ router.use((request, response, next) => {
     .then((data) => {
       response.json(data[0]);
     })    
+  })
+
+  router.route('/offer/:listingID').get((request, response) => {
+    Db.getOffersByListing(request.params.listingID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/client/:clientID').get((request, response) => {
+    Db.getClientByID(request.params.clientID)
+    .then((data) => {
+      response.json(data[0]);
+    })
   })

@@ -53,6 +53,12 @@ export async function deleteClient(clientID) {
     return myJson
 }
 
+export async function getClientByID(clientID) {
+    const response = await fetch(`http://localhost:8090/api/client/${clientID}`);
+    const myJson = await response.json();
+    return myJson
+}
+
 export async function getClients() {
     const response = await fetch(`http://localhost:8090/api/client`);
     const myJson = await response.json();
@@ -117,4 +123,27 @@ export async function getFirms() {
     const response = await fetch(`http://localhost:8090/api/firm`);
     const myJson = await response.json();
     return myJson
+}
+
+export async function getEmployeeByID(id) {
+    const response = await fetch(`http://localhost:8090/api/employee?id=${id}`);
+    const myJson = await response.json();
+    return myJson
+}
+
+export async function getOffersByListing(listingId) {
+    const response = await fetch(`http://localhost:8090/api/offer/${listingId}`);
+    const myJson = await response.json();
+    const finalJson = [];
+    for (let i = 0; i < myJson.length; i  ++) {
+        const associatedClientJSON = await getClientByID(myJson[i].Client);
+        const newOfferJSON = {
+            OfferID: myJson[i].OfferID,
+            Price: myJson[i].Price,
+            FName: associatedClientJSON[0].FName,
+            LName: associatedClientJSON[0].LName,
+        }
+        finalJson.push(newOfferJSON);
+    }
+    return finalJson
 }

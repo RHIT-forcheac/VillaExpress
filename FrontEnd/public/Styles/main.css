@@ -34,7 +34,7 @@ body {
     transform: translateY(2px);
 }
 
-#addClientFab {
+#addClientFab, #addOfferFab {
     bottom: 10px;
     background: #A1D2CE;
     color: black;
@@ -102,15 +102,18 @@ body {
     padding-bottom: 0;
 }
 
-#clientEditBtn {
+#clientEditBtn, #offerEditBtn {
     color: white;
 }
 
-#editIcon, .clientEditBtn {
+#editIcon, .clientEditBtn, .offerEditBtn {
     background-color: #36454F;
 }
 
-#deleteIcon, .clientDeleteBtn {
+#deleteIcon, .clientDeleteBtn, .offerDeleteBtn {
     background-color: red;
 }
 
+.nav-link {
+    background-color: #4C6085;
+}

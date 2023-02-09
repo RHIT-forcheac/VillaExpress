@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>VillaExpress</title>
+</head>
+
+<body>
+    <ul id="navBar" class="nav nav-tabs">
+        <li class="nav-item">
+            <img id="villaLogo" src="./images/villa.png" alt="villa logo">
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./homeScreen.html">VillaExpress</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./clients.html">Clients</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./listings.html">Listings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Firm</a>
+        </li>
+
+    </ul>
+
+    <div id="offersPage" class="container page-container">
+
+        <table id="offersTable" class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th id="idHeader" scope="col">
+                        <div class="tblCol">
+                            <p class="tblColCont">#</p>
+                            <button id="idFilterArrow" class="tblColCont" type="button">
+                                <span class="material-symbols-outlined">
+                                    expand_more
+                                </span>
+                            </button>
+                        </div>
+                    </th>
+                    <th id="offer" scope="col">
+                        <div class="tblCol">
+                            <p class="tblColCont">Offer (USD $)</p>
+                            <button id="idFilterArrow" class="tblColCont" type="button">
+                                <span class="material-symbols-outlined">
+                                    expand_less
+                                </span>
+                            </button>
+                        </div>
+                    </th>
+                    <th id="clientFirst" scope="col">
+                        <div class="tblCol">
+                            <p class="tblColCont">Client First</p>
+                            <button id="idFilterArrow" class="tblColCont" type="button">
+                                <span class="material-symbols-outlined">
+                                    expand_less
+                                </span>
+                            </button>
+                        </div>
+                    </th>
+                    <th id="clientLast" scope="col">
+                        <div class="tblCol">
+                            <p class="tblColCont">Client Last</p>
+                            <button id="idFilterArrow" class="tblColCont" type="button">
+                                <span class="material-symbols-outlined">
+                                    expand_less
+                                </span>
+                            </button>
+                        </div>
+                    </th>
+                    <th id="editHeader" scope="col">
+                        <div class="tblCol">
+                            <div class="tblColCont">
+                                Edit
+                            </div>
+                        </div>
+                    </th>
+                    <th id="deleteHeader" scope="col">
+                        <div class="tblCol">
+                            <div class="tblColCont">
+                                Delete
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="offersTableBody"></tbody>
+        </table>
+
+        <div class="text-center">
+            <p id="startPageTxt" class="d-inline">
+                1
+            </p>
+            <button id="beginningPage" class="pageArrow" type="button">
+                <span class="material-symbols-outlined">
+                    keyboard_double_arrow_left
+                </span>
+            </button>
+            <button id="prevPage" class="pageArrow" type="button">
+                <span class="material-symbols-outlined">
+                    chevron_left
+                </span>
+            </button>
+            <button id="nextPage" class="pageArrow" type="button">
+                <span class="material-symbols-outlined">
+                    chevron_right
+                </span>
+            </button>
+            <button id="lastPage" class="pageArrow" type="button">
+                <span class="material-symbols-outlined">
+                    keyboard_double_arrow_right
+                </span>
+            </button>
+            <p id="lastPageTxt" class="d-inline">
+                Last Page ...
+            </p>
+        </div>
+    </div>
+
+    <button id="addOfferFab" type="button" class="btn bmd-btn-fab" data-toggle="modal"
+        data-target="#addOfferDialogue">
+        <i class="material-icons">add</i>
+    </button>
+
+    <div class="modal fade" id="addOfferDialogue" tabindex="-1" role="dialog" aria-labelledby="Add quote dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Offer for Listing</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="inputOfferValue">Offer Value</label>
+                                <input type="text" class="form-control" id="inputOfferValue" placeholder="$0">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputClientID">Client ID</label>
+                                <input type="text" class="form-control" id="inputClientID">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="submitAddOffer" type="button" class="btn btn-primary" data-dismiss="modal">Add
+                        Offer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editOfferDialogue" data-client="" tabindex="-1" role="dialog" aria-labelledby="Add quote dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Offer</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="inputNewOfferValue">Offer Value</label>
+                                <input type="text" class="form-control" id="inputNewOfferValue" placeholder="$0">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputNewClientID">Client ID</label>
+                                <input type="text" class="form-control" id="inputNewClientID" placeholder="clientID">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="submitEditOffer" type="button" class="btn btn-primary" data-dismiss="modal">Edit
+                        Offer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/popper.js"></script>
+    <script src="scripts/bootstrap-material-design.js"></script>
+    <script>
+        $("body").bootstrapMaterialDesign();
+    </script>
+    <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script type="module" src="./Scripts/main.js"></script>
+</body>
+
+</html>
