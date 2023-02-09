@@ -3,6 +3,7 @@ var rhit = rhit || {};
 import {
 	getOffersByListing,
     addOffer,
+    deleteOffer,
 } from "./apiFunctions.js"
 
 //TODO: Create API functions/sprocs for offers
@@ -25,9 +26,9 @@ export class OfferPageController {
                 Listing: this.listingID,
 				Client: document.querySelector("#inputClientID").value,
 			}
-            //TODO: Refactor for offer
 			rhit.offerManager.addOffer(inputJson);
 			this.updateView();
+            location.reload();
 		};
 
 		document.querySelector("#submitEditOffer").onclick = (event) => {
@@ -39,6 +40,7 @@ export class OfferPageController {
             //TODO: Refactor for offer
 			//rhit.offerManager.editClientInfo(inputJson);
 			this.updateView();
+            location.reload();
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
@@ -68,7 +70,6 @@ export class OfferPageController {
 
 	updateView() {
 		rhit.offerManager.getOffers(this.listingID);
-
 		document.querySelector("#startPageTxt").innerText = 1
 		document.querySelector("#lastPageTxt").innerText = rhit.offerManager.pages;
 	}
@@ -140,8 +141,8 @@ class OfferManager {
 				let rowIndex = $(deleteButton).parent().data('index');   // jQuery
 				let currentOffer = offersJson[rowIndex];
 				let offerId = currentOffer.OfferID;
-                //TODO: refactor to offer when api function is made
-				deleteOffer(offerId);
+				deleteOffer(offerId).then(rhit.offerManager);
+                location.reload();
 			})
 
 			row$.append(editButton);

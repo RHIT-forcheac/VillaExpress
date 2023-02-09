@@ -58,6 +58,7 @@ export async function addFirm(firmJSON) {
     return myJson
 }
 
+//TODO: double check parse json errors
 export async function addClient(clientJson) {
     const response = await fetch(`http://localhost:8090/api/client`, {
         method: 'POST',
@@ -129,6 +130,16 @@ export async function deleteListing(listingID) {
     });
     const myJson = await response.json();
     return myJson
+}
+
+export async function deleteOffer(offerID) {
+    const response = await fetch(`http://localhost:8090/api/offer/${offerID}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': '/*',
+        },
+    });
+    return response
 }
 
 export async function deleteFirm(firmID) {
