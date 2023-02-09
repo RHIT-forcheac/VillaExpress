@@ -61,6 +61,83 @@ async function getClients() {
     }
 }
 
+async function getListings() {
+    try {
+        let pool = await sql.connect(config);
+        let newListingsList = await pool.request()
+            .execute('getListings');
+        return newListingsList.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function addClient(fName, lName, dob, phoneNumber, address, email, active) {
+    try {
+        console.log("dob", dob);
+        let pool = await sql.connect(config);
+        let newClient = await pool.request()
+            .input('fname', sql.VarChar, fName)
+            .input('lname', sql.VarChar, lName)
+            .input('dob', sql.Date, dob)
+            .input('phoneNumber', sql.Char, phoneNumber)
+            .input('address', sql.VarChar, address)
+            .input('email', sql.VarChar, email)
+            .input('active', sql.Bit, active)
+            .execute('addClient');
+        return newClient.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function addListing(EmployeeAssignDate, CloseDate, PostDate, Address, State) {
+    try {
+        let pool = await sql.connect(config);
+        let newListing = await pool.request()
+            .input('EmployeeAssignDate', sql.Date, EmployeeAssignDate)
+            .input('CloseDate', sql.Date, CloseDate)
+            .input('PostDate', sql.Date, PostDate)
+            .input('Address', sql.VarChar, Address)
+            .input('State', sql.VarChar, State)
+            .execute('addListing');
+        return newListing.recordsets;
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function updateClient(clientID, fName, lName, dob, phoneNumber, address, email, active) {
+    try {
+        let pool = await sql.connect(config);
+        let newClient = await pool.request()
+            .input('clientID', sql.Int, clientID)
+            .input('fname', sql.VarChar, fName)
+            .input('lname', sql.VarChar, lName)
+            .input('dob', sql.Date, dob)
+            .input('phoneNumber', sql.Char, phoneNumber)
+            .input('address', sql.VarChar, address)
+            .input('email', sql.VarChar, email)
+            .input('active', sql.Bit, active)
+            .execute('updateClient');
+        return newClient.recordsets;
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function deleteListing(listingID) {
+    try {
+        let pool = await sql.connect(config);
+        let listingDeleted = await pool.request()
+            .input('listingID', sql.Int, listingID)
+            .execute('deleteListing');
+        return listingDeleted.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 async function deleteClient(clientID) {
     try {
         let pool = await sql.connect(config);
@@ -102,83 +179,6 @@ async function loginUser(username, password) {
         return [loginStatus.output.result, loginStatus.output.employeeID];
     } catch (err) {
         console.log("login user failed", err, "username:" +  username, "passwordHash:" + password);
-    }
-}
-
-async function addClient(fName, lName, dob, phoneNumber, address, email, active) {
-    try {
-        console.log("dob", dob);
-        let pool = await sql.connect(config);
-        let newClient = await pool.request()
-            .input('fname', sql.VarChar, fName)
-            .input('lname', sql.VarChar, lName)
-            .input('dob', sql.Date, dob)
-            .input('phoneNumber', sql.Char, phoneNumber)
-            .input('address', sql.VarChar, address)
-            .input('email', sql.VarChar, email)
-            .input('active', sql.Bit, active)
-            .execute('addClient');
-        return newClient.recordsets;
-    } catch (err) {        
-        console.log(err);
-    }
-}
-
-async function updateClient(clientID, fName, lName, dob, phoneNumber, address, email, active) {
-    try {
-        let pool = await sql.connect(config);
-        let newClient = await pool.request()
-            .input('clientID', sql.Int, clientID)
-            .input('fname', sql.VarChar, fName)
-            .input('lname', sql.VarChar, lName)
-            .input('dob', sql.Date, dob)
-            .input('phoneNumber', sql.Char, phoneNumber)
-            .input('address', sql.VarChar, address)
-            .input('email', sql.VarChar, email)
-            .input('active', sql.Bit, active)
-            .execute('updateClient');
-        return newClient.recordsets;
-    } catch(err) {
-        console.log(err);
-    }
-}
-
-async function addListing(EmployeeAssignDate, CloseDate, PostDate, Address, State) {
-    try {
-        let pool = await sql.connect(config);
-        let newListing = await pool.request()
-            .input('EmployeeAssignDate', sql.Date, EmployeeAssignDate)
-            .input('CloseDate', sql.Date, CloseDate)
-            .input('PostDate', sql.Date, PostDate)
-            .input('Address', sql.VarChar, Address)
-            .input('State', sql.VarChar, State)
-            .execute('addListing');
-        return newListing.recordsets;
-    } catch(err) {
-        console.log(err);
-    }
-}
-
-async function deleteListing(listingID) {
-    try {
-        let pool = await sql.connect(config);
-        let listingDeleted = await pool.request()
-            .input('listingID', sql.Int, listingID)
-            .execute('deleteListing');
-        return listingDeleted.recordsets;
-    } catch (err) {        
-        console.log(err);
-    }
-}
-
-async function getListings() {
-    try {
-        let pool = await sql.connect(config);
-        let newListingsList = await pool.request()
-            .execute('getListings');
-        return newListingsList.recordsets;
-    } catch (err) {        
-        console.log(err);
     }
 }
 
