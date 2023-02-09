@@ -4,6 +4,7 @@ import {
 	getOffersByListing,
     addOffer,
     deleteOffer,
+    updateOffer,
 } from "./apiFunctions.js"
 
 //TODO: Create API functions/sprocs for offers
@@ -32,11 +33,17 @@ export class OfferPageController {
 		};
 
 		document.querySelector("#submitEditOffer").onclick = (event) => {
-			//let offerId = document.querySelector("#editOfferDialogue").getAttribute("data-clientID");
+			let offerId = document.querySelector("#editOfferDialogue").getAttribute("data-offerID");
+            let clientId = document.querySelector("#inputNewClientID").value
+            if (!clientId) {
+                clientId = null;
+            }
+            console.log(offerId);
 			const inputJson = {
+                OfferID: offerId,
 				Price: document.querySelector("#inputNewOfferValue").value,
                 Listing: this.listingID,
-				Client: document.querySelector("#inputNewClientID").value,
+				Client: clientId,
 			}
             //TODO: Refactor for offer
 			rhit.offerManager.editOfferInfo(inputJson);
@@ -134,7 +141,7 @@ class OfferManager {
                 //TODO: Double check offerID matches json if errors
 				modal.setAttribute("data-offerID", currentOffer.OfferID)
 				document.querySelector("#inputNewOfferValue").value = currentOffer.Price;
-				document.querySelector("#inputNewClientID").value = "#";
+				// document.querySelector("#inputNewClientID").value = "";
 			})
 
 			deleteButton.on("click", function() {
