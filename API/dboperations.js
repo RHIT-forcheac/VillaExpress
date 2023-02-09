@@ -164,6 +164,18 @@ async function deleteClient(clientID) {
     }
 }
 
+async function deleteOffer(offerID) {
+    try {
+        let pool = await sql.connect(config);
+        let offerDeleted = await pool.request()
+            .input('OfferID', sql.Int, offerID)
+            .execute('deleteOffer');
+        return offerDeleted.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
 async function registerNewUser(username, password) {
     try {
         var salt = getNewSalt();
@@ -216,6 +228,7 @@ module.exports = {
     updateClient: updateClient,
     deleteClient: deleteClient,
     deleteListing: deleteListing,
+    deleteOffer: deleteOffer,
     registerNewUser: registerNewUser,
     loginUser: loginUser,
 }

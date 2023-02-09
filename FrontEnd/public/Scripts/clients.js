@@ -246,8 +246,4 @@ class ClientManager {
 	editClientInfo(clientJson) {
 		updateClient(clientJson)
 	}
-
-	// deleteClient(clientID) {
-	// 	deleteClient(clientID);
-	// }
 }

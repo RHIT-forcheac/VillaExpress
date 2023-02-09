@@ -127,3 +127,10 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/offer/:offerID').delete((request, response) => {
+    Db.deleteOffer(request.params.offerID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+

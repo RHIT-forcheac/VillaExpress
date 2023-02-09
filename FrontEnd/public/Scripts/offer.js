@@ -6,6 +6,7 @@ import {
 } from "./apiFunctions.js"
 
 //TODO: Create API functions/sprocs for offers
+//TODO: fix pages not functioning properly
 
 rhit.offerManager = null;
 
@@ -140,7 +141,7 @@ class OfferManager {
 				let currentOffer = offersJson[rowIndex];
 				let offerId = currentOffer.OfferID;
                 //TODO: refactor to offer when api function is made
-				deleteClient(offerId);
+				deleteOffer(offerId);
 			})
 
 			row$.append(editButton);
@@ -202,9 +203,4 @@ class OfferManager {
         //TODO: change to offer when api function is implemented
 		updateOffer(offerJson)
 	}
-
-    //TODO: implement delete for offer
-	// deleteClient(clientID) {
-	// 	deleteClient(clientID);
-	// }
 }
