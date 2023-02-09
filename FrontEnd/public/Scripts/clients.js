@@ -36,6 +36,7 @@ export class ClientPageController {
 			}
 			rhit.clientManager.addClient(inputJson);
 			this.updateView();
+			location.reload();
 		};
 
 		document.querySelector("#submitEditClient").onclick = (event) => {
@@ -60,6 +61,7 @@ export class ClientPageController {
 			console.log(inputJson);
 			rhit.clientManager.editClientInfo(inputJson);
 			this.updateView();
+			location.reload();
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
@@ -190,6 +192,7 @@ class ClientManager {
 				console.log(clientId);
 				deleteClient(clientId);
 				console.log("deleting client");
+				location.reload();
 			})
 
 			row$.append(editButton);
