@@ -14,17 +14,41 @@ const bcrypt = require('bcrypt');
 //     }
 // }
 
-// async function getEmployeeByUsername(username) {
-//     try {
-//         let pool = await sql.connect(config);
-//         let employee = await pool.request()
-//             .input('input_parameter', sql.Int, username)
-//             .query("SELECT * from Employee where Username = @input_parameter");
-//         return employee.recordsets;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+async function getEmployeeByID(id) {
+    try {
+        let pool = await sql.connect(config);
+        let employee = await pool.request()
+            .input('EmployeeID', sql.Int, id)
+            .execute('getEmployeeTable')
+        return employee.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getOffersByListing(listingID) {
+    try {
+        let pool = await sql.connect(config);
+        let newOffersList = await pool.request()
+            .input('listingID', sql.Int, listingID)
+            .execute('getOffersByListing');
+        return newOffersList.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function getClientByID(clientId) {
+    try {
+        let pool = await sql.connect(config);
+        let client = await pool.request()
+            .input('ClientID', sql.Int, clientId)
+            .execute('getClientTable')
+        return client.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 async function getClients() {
     try {
@@ -73,8 +97,9 @@ async function loginUser(username, password) {
             .input('username', sql.VarChar, username)
             .input('passwordHash', sql.VarChar, password)
             .output('result', sql.Bit)
+            .output('employeeID', sql.Int)
             .execute('logInUser')
-        return loginStatus.output.result;
+        return [loginStatus.output.result, loginStatus.output.employeeID];
     } catch (err) {
         console.log("login user failed", err, "username:" +  username, "passwordHash:" + password);
     }
@@ -242,4 +267,7 @@ module.exports = {
     addListing: addListing,
     getListings: getListings, 
     deleteListing: deleteListing,
+    getEmployeeByID: getEmployeeByID,
+    getOffersByListing: getOffersByListing,
+    getClientByID,
 }
