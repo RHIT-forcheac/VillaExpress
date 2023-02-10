@@ -72,20 +72,27 @@ async function getListings() {
     }
 }
 
-async function addClient(fName, lName, dob, phoneNumber, address, email, active) {
+function getNewSalt() {
+    return bcrypt.genSaltSync(10);;
+}
+
+function hashPassword(password, salt) {
+    return bcrypt.hashSync(password, salt);
+}
+
+//For import
+async function insertClient(ID, phoneNumber, address, email, active, firmID) {
     try {
-        console.log("dob", dob);
         let pool = await sql.connect(config);
-        let newClient = await pool.request()
-            .input('fname', sql.VarChar, fName)
-            .input('lname', sql.VarChar, lName)
-            .input('dob', sql.Date, dob)
+        let insertClient = await pool.request()
+            .input('ID', sql.Int, ID)
             .input('phoneNumber', sql.Char, phoneNumber)
             .input('address', sql.VarChar, address)
             .input('email', sql.VarChar, email)
             .input('active', sql.Bit, active)
-            .execute('addClient');
-        return newClient.recordsets;
+            .input('firmID', sql.Int, firmID)
+            .execute('insertClient');
+        return insertClient;
     } catch (err) {        
         console.log(err);
     }
@@ -125,17 +132,28 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
     try {
         let pool = await sql.connect(config);
         let newClient = await pool.request()
-            .input('clientID', sql.Int, clientID)
-            .input('fname', sql.VarChar, fName)
-            .input('lname', sql.VarChar, lName)
-            .input('dob', sql.Date, dob)
-            .input('phoneNumber', sql.Char, phoneNumber)
-            .input('address', sql.VarChar, address)
-            .input('email', sql.VarChar, email)
-            .input('active', sql.Bit, active)
-            .execute('updateClient');
-        return newClient.recordsets;
-    } catch(err) {
+            .input('ID', sql.Int, ID)
+            .input('CompanyName', sql.VarChar, CompanyName)
+            .input('address', sql.VarChar, Address)
+            .execute('insertFirm');
+        return newClient;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertEmployee(ID, username, passwordHash, adminAccess, firmID) {
+    try {
+        let pool = await sql.connect(config);
+        let newEmployee = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('Username', sql.VarChar, username)
+            .input('passwordHash', sql.VarChar, passwordHash)
+            .input('adminAccess', sql.Bit, adminAccess)
+            .input('firmID', sql.Int, firmID)
+            .execute('insertEmployee');
+        return newEmployee;
+    } catch (err) {        
         console.log(err);
     }
 }
@@ -155,13 +173,15 @@ async function updateOffer(offerID, price, listing, client) {
     }
 }
 
-async function deleteListing(listingID) {
+async function insertOffer(price, listing ,client) {
     try {
         let pool = await sql.connect(config);
-        let listingDeleted = await pool.request()
-            .input('listingID', sql.Int, listingID)
-            .execute('deleteListing');
-        return listingDeleted.recordsets;
+        let newOffer = await pool.request()
+            .input('price', sql.Money, price)
+            .input('listing', sql.Int, listing)
+            .input('client', sql.Int, client)
+            .execute('insertOffer')
+        return newOffer;
     } catch (err) {        
         console.log(err);
     }

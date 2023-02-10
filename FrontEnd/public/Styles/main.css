@@ -114,6 +114,13 @@ body {
     background-color: red;
 }
 
+#firmCard {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    margin: 0 auto;
+    display: grid;
+}
+
 .nav-link {
     background-color: #4C6085;
 }
