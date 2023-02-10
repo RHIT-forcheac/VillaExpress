@@ -189,7 +189,6 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
             .input('active', sql.Bit, active)
             .execute('updateClient');
         return newClient.recordsets;
-    } catch (err) {
         console.log(err);
     }
 }
@@ -311,6 +310,40 @@ function getNewSalt() {
 function hashPassword(password, salt) {
     return bcrypt.hashSync(password, salt);
 }
+
+//For import
+async function insertClient(ID, phoneNumber, address, email, active, firmID) {
+    try {
+        let pool = await sql.connect(config);
+        let insertClient = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('phoneNumber', sql.Char, phoneNumber)
+            .input('address', sql.VarChar, address)
+            .input('email', sql.VarChar, email)
+            .input('active', sql.Bit, active)
+            .input('firmID', sql.Int, firmID)
+            .execute('insertClient');
+        return insertClient;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertFirm(ID, CompanyName, Address) {
+    try {
+        let pool = await sql.connect(config);
+        let newClient = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('CompanyName', sql.VarChar, CompanyName)
+            .input('address', sql.VarChar, Address)
+            .execute('insertFirm');
+        return newClient;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+
 
 async function addFirm(CompanyName, Address) {
     try{
