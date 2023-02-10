@@ -343,6 +343,83 @@ async function insertFirm(ID, CompanyName, Address) {
     }
 }
 
+async function insertEmployee(ID, username, passwordHash, adminAccess, firmID) {
+    try {
+        let pool = await sql.connect(config);
+        let newEmployee = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('Username', sql.VarChar, username)
+            .input('passwordHash', sql.VarChar, passwordHash)
+            .input('adminAccess', sql.Bit, adminAccess)
+            .input('firmID', sql.Int, firmID)
+            .execute('insertEmployee');
+        return newEmployee;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertListing(ID, employeeAssignDate, employeeID, address, postDate, closeDate, state) {
+    try {
+        let pool = await sql.connect(config);
+        let newListing = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('employeeAssignDate', sql.Date, employeeAssignDate)
+            .input('employeeID', sql.Int, employeeID)
+            .input('address', sql.VarChar, address)
+            .input('postDate', sql.Date, postDate)
+            .input('closeDate', sql.Date, closeDate)
+            .input('state', sql.Bit, state)
+            .execute('insertListing')
+        return newListing;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertOffer(price, listing ,client) {
+    try {
+        let pool = await sql.connect(config);
+        let newOffer = await pool.request()
+            .input('price', sql.Money, price)
+            .input('listing', sql.Int, listing)
+            .input('client', sql.Int, client)
+            .execute('insertOffer')
+        return newOffer;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertPerson(ID, fname, lname, dob) {
+    try {
+        let pool = await sql.connect(config);
+        let newPerson = await pool.request()
+            .input('ID', sql.Int, ID)
+            .input('fname', sql.VarChar, fname)
+            .input('lname', sql.VarChar, lname)
+            .input('dob', sql.Date, dob)
+            .execute('insertPerson')
+        return newPerson;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function insertRepresent(client, employee) {
+    try {
+        let pool = await sql.connect(config);
+        let newRepresent = await pool.request()
+            .input('client', sql.Int, client)
+            .input('employee', sql.Int, employee)
+            .execute('insertRepresent')
+        return newRepresent;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+
 
 
 async function addFirm(CompanyName, Address) {
@@ -433,8 +510,15 @@ module.exports = {
     addListing: addListing,
     getListings: getListings, 
     deleteListing: deleteListing,
+    //for import
     deleteOffer: deleteOffer,
     closeListing: closeListing,
     registerNewUser: registerNewUser,
-    loginUser: loginUser,
+    loginUser: loginUser,,
+    insertFirm: insertFirm,
+    insertEmployee: insertEmployee,
+    insertListing: insertListing,
+    insertOffer: insertOffer,
+    insertPerson: insertPerson,
+    insertRepresent: insertRepresent
 }
