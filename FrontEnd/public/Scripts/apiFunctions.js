@@ -33,6 +33,16 @@ export async function getListings() {
     return myJson
 }
 
+export async function getOfferCountFromListing(listingID) {
+    const response = await fetch(`http://localhost:8090/api/offerCount/${listingID}`, {
+        method: 'GET',
+        accept: '/*'
+    });
+    const myJson = await response.json();
+    console.log(myJson);
+    return myJson;
+}
+
 export async function getClientByID(clientID) {
     const response = await fetch(`http://localhost:8090/api/client/${clientID}`);
     const myJson = await response.json();
