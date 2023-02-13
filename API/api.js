@@ -180,7 +180,13 @@ router.use((request, response, next) => {
       response.json(data[0]);
     })    
   })
-  
+
+  router.route('/offer/:listingID').get((request, response) => {
+    Db.getOffersByListing(request.params.listingID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
 
   router.route('/offerCount/:listingID').get((request, response) => {
     Db.getOfferCountFromListing(request.params.listingID)
