@@ -52,7 +52,7 @@ router.use((request, response, next) => {
   router.route('/client').post((request, response) => {
     let clientJson = request.body;
     Db.addClient(clientJson.FName, clientJson.LName, clientJson.DateOfBirth,
-       clientJson.PhoneNumber, clientJson.Address, clientJson.Email, clientJson.Active)
+       clientJson.PhoneNumber, clientJson.Address, clientJson.Email, clientJson.Active, request.query.employeeID)
     .then((data) => {
       response.json(data[0]);
     })

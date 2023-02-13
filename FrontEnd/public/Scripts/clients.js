@@ -24,7 +24,7 @@ export class ClientPageController {
 		this.activeFilter = '';
 		rhit.clientManager = new ClientManager();
 
-		document.querySelector("#submitAddClient").onclick = (event) => {
+		document.querySelector("#submitAddClient").onclick = async (event) => {
 			const addressJson = {
 				streetAddress: document.querySelector("#inputStreetAddress").value,
 				city: document.querySelector("#inputCity").value,
@@ -41,12 +41,12 @@ export class ClientPageController {
 				Email: document.querySelector("#inputEmail").value,
 				Active: document.querySelector("#inputClientActive").value,
 			}
-			rhit.clientManager.addClient(inputJson);
+			await rhit.clientManager.addClient(inputJson);
+			rhit.clientManager.targetPage = null;
 			this.updateView();
-			location.reload();
 		};
 
-		document.querySelector("#submitEditClient").onclick = (event) => {
+		document.querySelector("#submitEditClient").onclick = async (event) => {
 			let clientID = document.querySelector("#editClientDialogue").getAttribute("data-clientID");
 			const addressJson = {
 				streetAddress: document.querySelector("#inputNewStreetAddress").value,
@@ -65,9 +65,17 @@ export class ClientPageController {
 				Email: document.querySelector("#inputNewEmail").value,
 				Active: document.querySelector("#inputNewClientActive").value,
 			}
-			rhit.clientManager.editClientInfo(inputJson);
+			await rhit.clientManager.editClientInfo(inputJson);
+			rhit.clientManager.targetPage = null;
 			this.updateView();
-			location.reload();
+		};
+
+		document.querySelector("#submitDeleteClient").onclick = async (event) => {
+			let clientID = document.querySelector("#deleteClientDialogue").getAttribute("data-clientID");
+			let deleteStatus = await rhit.clientManager.deleteClient(clientID);
+			console.log(deleteStatus);
+			rhit.clientManager.targetPage = null;
+			this.updateView();
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
@@ -164,7 +172,6 @@ export class ClientPageController {
 	}
 
 	updateView() {
-		console.log(rhit.clientManager.pages);
 		rhit.clientManager.getClients(this.idFilter, this.fNameFilter, this.lNameFilter, this.activeFilter);
 
 		document.querySelector("#startPageTxt").innerText = 1
@@ -186,6 +193,7 @@ class ClientManager {
 	};
 
 	getClients = async function (idFilter, fNameFilter, lNameFilter, activeFilter) {
+		console.log("Getting clients");
 		const clientsListJson = await getClientsForEmployee(rhit.employeeID, idFilter, fNameFilter, lNameFilter, activeFilter);
 		document.querySelector("#clientsTableBody").innerHTML = "";
 		let tableBody = document.querySelector("#clientsTable");
@@ -237,7 +245,8 @@ class ClientManager {
 			let editButton = $('<td/>').html(`<button id="clientEditBtn${i}" class="tblColCont clientEditBtn" type="button" data-toggle="modal"
 			data-target="#editClientDialogue">
 			<span id="editIcon" class="material-symbols-outlined">edit</span></button>`);
-			let deleteButton = $('<td/>').html(`<button id="clientDeleteBtn${i}" class="tblColCont clientDeleteBtn" type="button">
+			let deleteButton = $('<td/>').html(`<button id="clientDeleteBtn${i}" class="tblColCont clientDeleteBtn" type="button"
+			data-toggle="modal"data-target="#deleteClientDialogue">
 			<span id="deleteIcon" class="material-symbols-outlined">delete</span></button>`);
 
 			editButton.on("click", function() {
@@ -259,11 +268,15 @@ class ClientManager {
 			})
 
 			deleteButton.on("click", function() {
-				let rowIndex = $(editButton).parent().data('index');   // jQuery
+				// let rowIndex = $(editButton).parent().data('index');   // jQuery
+				// let currentClient = clientsJson[rowIndex];
+				// let clientId = currentClient.ClientID;
+				// deleteClient(clientId);
+				// rhit.clientManager.targetPage = null;
+				let rowIndex = $(deleteButton).parent().data('index'); 
 				let currentClient = clientsJson[rowIndex];
-				let clientId = currentClient.ClientID;
-				deleteClient(clientId);
-				location.reload();
+				let modal = document.querySelector("#deleteClientDialogue");
+				modal.setAttribute("data-clientID", currentClient.ClientID);
 			})
 
 			row$.append(editButton);
@@ -295,7 +308,9 @@ class ClientManager {
 		let rowsInTable = table.rows;
 		if (this.targetPage == null){
 			for (let k = 2; k < this.maxRows; k++) {
-				rowsInTable[k].style.display = "table-row";
+				if(rowsInTable[k]){
+					rowsInTable[k].style.display = "table-row";
+				}
 			}
 			this.targetPage = 0;
 			this.targetConfirmedPage = this.targetPage;
@@ -320,5 +335,9 @@ class ClientManager {
 
 	editClientInfo(clientJson) {
 		updateClient(clientJson)
+	}
+
+	deleteClient(clientID) {
+		deleteClient(clientID);
 	}
 }
