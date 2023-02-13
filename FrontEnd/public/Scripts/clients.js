@@ -185,7 +185,6 @@ class ClientManager {
 
 	getClients = async function (idFilter, fNameFilter, lNameFilter, activeFilter) {
 		const clientsListJson = await getClientsForEmployee(rhit.employeeID, idFilter, fNameFilter, lNameFilter, activeFilter);
-		console.log(clientsListJson);
 		document.querySelector("#clientsTableBody").innerHTML = "";
 		let tableBody = document.querySelector("#clientsTable");
 		this.jsonToTbl(clientsListJson, tableBody);

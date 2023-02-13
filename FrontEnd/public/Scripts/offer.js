@@ -19,6 +19,8 @@ export class OfferPageController {
 		this.currPage = 1;
 		this.endPage = 0;
         this.listingID = listingID;
+		this.idFilter = '';
+		this.offerFilter = '';
 		rhit.offerManager = new OfferManager();
 
 		document.querySelector("#submitAddOffer").onclick = (event) => {
@@ -73,11 +75,47 @@ export class OfferPageController {
 			this.updateView();
 
 		}
+
+		document.querySelector("#idFilterArrow").onclick = (event) => {
+			if (!this.idFilter){
+				this.idFilter = 1;
+				document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			}
+			else {
+				this.idFilter = 0;
+				document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
+			}
+			rhit.offerManager.targetPage = null;
+			this.updateView();
+		}
+
+		document.querySelector("#offerFilterArrow").onclick = (event) => {
+			if (!this.offerFilter){
+				this.offerFilter = 1;
+				document.querySelector("#offerFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			}
+			else {
+				this.offerFilter = 0;
+				document.querySelector("#offerFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
+			}			
+			rhit.offerManager.targetPage = null;
+			this.updateView();
+		}
+
+		document.querySelector("#resetFiltersBtn").onclick = (event) => {
+			this.idFilter = '';
+			this.offerFilter = '';
+			document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			document.querySelector("#offerFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';	
+			rhit.offerManager.targetPage = null;
+			this.updateView();
+		}
+
 		this.updateView();
 	}
 
 	updateView() {
-		rhit.offerManager.getOffers(this.listingID);
+		rhit.offerManager.getOffers(this.listingID, this.idFilter, this.offerFilter);
 		document.querySelector("#startPageTxt").innerText = 1
 		document.querySelector("#lastPageTxt").innerText = rhit.offerManager.pages;
 	}
@@ -96,8 +134,9 @@ class OfferManager {
 		const addOfferStatus = await addOffer(offerJson);
 	};
 
-	getOffers = async function (listingID) {
-		const offersListJson = await getOffersByListing(listingID);
+	getOffers = async function (listingID, idFilter, offerFilter) {
+		const offersListJson = await getOffersByListing(listingID, idFilter, offerFilter);
+		document.querySelector("#offersTableBody").innerHTML = "";
 		let tableBody = document.querySelector("#offersTable");
 		this.jsonToTbl(offersListJson, tableBody);
 		let table = document.querySelector("#offersTable");
