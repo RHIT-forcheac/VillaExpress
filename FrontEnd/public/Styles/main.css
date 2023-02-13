@@ -114,6 +114,12 @@ body {
     background-color: red;
 }
 
+#listingDetailsCard, #employeeDetailsCard, 
+#listingStatusCard, #clientDetailsCard {
+    height: 14rem;
+    width: 18rem;
+}
+
 .nav-link {
     background-color: #4C6085;
 }
