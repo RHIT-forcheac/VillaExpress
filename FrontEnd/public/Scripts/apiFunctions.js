@@ -181,6 +181,17 @@ export async function deleteFirm(firmID) {
     return myJson
 }
 
+export async function closeListing(listingID, closeDate) {
+    const response = await fetch(`http://localhost:8090/api/closeListing/${listingID}&${closeDate}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': '/*',
+        },
+    });
+    const myJson = await response.json();
+    return myJson
+}
+
 export async function loginUser(username, password) {
     const response = await fetch(`http://localhost:8090/api/employee/${username}&${password}`, {
         method: 'GET',
