@@ -96,8 +96,8 @@ export async function addClient(clientJson) {
         },
         body: JSON.stringify(clientJson),
     });
-    const myJson = await response.json();
-    return myJson
+    //const myJson = await response.json();
+    return response;
 }
 
 export async function addListing(listingJSON) {

@@ -30,14 +30,15 @@ export class ClientPageController {
 			}
 			const addressStr = `${addressJson.streetAddress}, ${addressJson.city}, ${addressJson.state}, ${addressJson.zip}`
 			const inputJson = {
-				fname: document.querySelector("#inputFirstName").value,
-				lname: document.querySelector("#inputLastName").value,
-				dob: document.querySelector("#inputDateOfBirth").value,
-				phoneNumber: document.querySelector("#inputPhoneNumber").value,
-				address: addressStr,
-				email: document.querySelector("#inputEmail").value,
-				active: document.querySelector("#inputClientActive").value,
+				FName: document.querySelector("#inputFirstName").value,
+				LName: document.querySelector("#inputLastName").value,
+				DateOfBirth: document.querySelector("#inputDateOfBirth").value,
+				PhoneNumber: document.querySelector("#inputPhoneNumber").value,
+				Address: addressStr,
+				Email: document.querySelector("#inputEmail").value,
+				Active: document.querySelector("#inputClientActive").value,
 			}
+			console.log(inputJson);
 			rhit.clientManager.addClient(inputJson);
 			this.updateView();
 			location.reload();
