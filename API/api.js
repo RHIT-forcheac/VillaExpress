@@ -65,8 +65,10 @@ router.use((request, response, next) => {
     })
   })
 
-  router.route('/clientEmployee/:employeeID').get((request, response) => {
-    Db.getClientsForEmployee(request.params.employeeID)
+  router.route('/clientEmployee').get((request, response) => {
+    let clientJsonFilters = request.body;
+    Db.getClientsForEmployee(clientJsonFilters.employeeID, clientJsonFilters.orderID,
+      clientJsonFilters.orderFName, clientJsonFilters.orderLName, clientJsonFilters.orderActive)
     .then((data) => {
       response.json(data[0]);
     })

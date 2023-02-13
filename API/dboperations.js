@@ -61,11 +61,15 @@ async function getClients() {
     }
 }
 
-async function getClientsForEmployee(employeeID) {
+async function getClientsForEmployee(employeeID, orderID, orderFName, orderLName, orderActive) {
     try {
         let pool = await sql.connect(config);
         let newClientsOfEmployee = await pool.request()
             .input('employeeID', sql.Int, employeeID)
+            .input('orderID', sql.Bit, orderID)
+            .input('orderFName', sql.Bit, orderFName)
+            .input('orderLName', sql.Bit, orderLName)
+            .input('orderActive', sql.Bit, orderActive)
             .execute('getClientsForEmployee');
         return newClientsOfEmployee.recordsets;
     } catch (err) {
