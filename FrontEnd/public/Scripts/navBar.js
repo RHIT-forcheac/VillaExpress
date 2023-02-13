@@ -12,8 +12,6 @@ rhit.employeeID = null;
 export class NavBarController{
 	constructor() {
 		rhit.navBarManager = new NavBarManager();
-        //rhit.currentPage = 'homePage'
-		console.log(rhit.currentUser);
 
 		document.querySelector("#homePageButton").onclick = (event) => {
 			window.location.href = `../homeScreen.html?employeeID=${rhit.employeeID}`;
@@ -67,6 +65,7 @@ export function initializePage() {
 
 	if(document.querySelector("#homePage")){
 		console.log("You are on the home page");
+		document.querySelector("#homePageButton").style.borderBottom = '0.214rem solid';
 		rhit.employeeID = urlParams.get("employeeID");
 		new NavBarController();
 	}
@@ -74,6 +73,7 @@ export function initializePage() {
 	if(document.querySelector("#clientsMainPage")){
 		console.log("You are on the clients page");
 		rhit.employeeID = urlParams.get("employeeID");
+		document.querySelector("#clientsPageButton").style.borderBottom = '0.214rem solid';
 		new NavBarController();
 		new ClientPageController();
 	}
@@ -81,6 +81,7 @@ export function initializePage() {
 	if(document.querySelector("#listingsPage")){
 		console.log("You are on the listings page");
 		const employeeID = urlParams.get("employeeID");
+		document.querySelector("#listingsPageButton").style.borderBottom = '0.214rem solid';
 		rhit.employeeID = employeeID;
 		new NavBarController();
 		new ListingPageController(employeeID);
@@ -89,6 +90,7 @@ export function initializePage() {
 	if(document.querySelector("#firmPage")){
 		console.log("You are on the firm page");
 		rhit.employeeID = urlParams.get("employeeID");
+		document.querySelector("#firmPageButton").style.borderBottom = '0.214rem solid';
 		new NavBarController();
 		//TODO: Add firm controller when page is finished
 		//new ClientPageController();
