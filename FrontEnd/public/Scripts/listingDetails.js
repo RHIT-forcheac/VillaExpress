@@ -27,9 +27,16 @@ export class DetailPageController {
 		};
 
 		document.querySelector("#submitEditListing").onclick = (event) => {
-			rhit.detailManager.editCurrentListing();
+			const inputJson = {
+                OfferID: offerId,
+				Price: document.querySelector("#inputNewOfferValue").value,
+                Listing: this.listingID,
+				Client: clientId,
+			}
+            //TODO: Refactor for offer
+			rhit.offerManager.editOfferInfo(inputJson);
 			this.updateView();
-		    location.reload();
+            location.reload();
 		};
 
 		document.querySelector("#deleteListing").onclick = (event) => {

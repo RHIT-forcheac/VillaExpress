@@ -123,6 +123,13 @@ router.use((request, response, next) => {
       response.json(data[0]);
     })    
   })
+
+  router.route('/listing/:listingID/:address').put((request, response) => {
+    Db.updateListing(request.params.listingID, request.params.address)
+    .then((data) => {
+      response.json(data[0]);
+    })    
+  })
   
 
   router.route('/offerCount/:listingID').get((request, response) => {
