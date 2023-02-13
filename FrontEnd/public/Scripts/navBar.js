@@ -18,30 +18,28 @@ export class NavBarController{
         //rhit.currentPage = 'homePage'
 		console.log(rhit.currentUser);
 
-        //TODO: Build on clicks for navbar links
 		document.querySelector("#homePageButton").onclick = (event) => {
-			//TODO: Navigate to proper page and construct correct controller
-			console.log("home clicked");
 			window.location.href = `../homeScreen.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
 		document.querySelector("#clientsPageButton").onclick = (event) => {
-            //TODO: Navigate to proper page and construct correct controller
-			console.log("clients clicked");
 			window.location.href = `../clients.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
         document.querySelector("#listingsPageButton").onclick = (event) => {
-			//TODO: Navigate to proper page and construct correct controller
 			window.location.href = `../listings.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
         document.querySelector("#firmPageButton").onclick = (event) => {
-			//TODO: Navigate to proper page and construct correct controller
 			window.location.href = `../firm.html?employeeID=${rhit.employeeID}`;
+			this.initializePage();
+		};
+
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			window.location.href = `../index.html`;
 			this.initializePage();
 		};
 	}
