@@ -96,8 +96,8 @@ export async function addFirm(firmJSON) {
     return myJson
 }
 
-export async function addClient(clientJson) {
-    const response = await fetch(`http://localhost:8090/api/client`, {
+export async function addClient(clientJson, employeeID) {
+    const response = await fetch(`http://localhost:8090/api/client?employeeID=${employeeID}`, {
         method: 'POST',
         headers: {
             'Accept': '/*',
