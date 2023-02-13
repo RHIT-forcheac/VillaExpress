@@ -62,6 +62,7 @@ async function getClients() {
 }
 
 async function getClientsForEmployee(employeeID, orderID, orderFName, orderLName, orderActive) {
+    console.log(orderActive);
     try {
         let pool = await sql.connect(config);
         let newClientsOfEmployee = await pool.request()

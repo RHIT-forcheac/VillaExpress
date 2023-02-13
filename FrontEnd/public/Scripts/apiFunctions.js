@@ -67,8 +67,14 @@ export async function getClients() {
     return myJson
 }
 
-export async function getClientsForEmployee(employeeID) {
-    const response = await fetch(`http://localhost:8090/api/clientEmployee/${employeeID}`);
+export async function getClientsForEmployee(employeeID, orderID, orderFName, orderLName, orderActive) {
+    const response = await fetch(`http://localhost:8090/api/clientEmployee/?` + new URLSearchParams({
+        employeeID: employeeID,
+        orderID: orderID,
+        orderFName: orderFName,
+        orderLName: orderLName,
+        orderActive: orderActive
+    }));
     const myJson = await response.json();
     return myJson
 }
@@ -86,7 +92,6 @@ export async function addFirm(firmJSON) {
     return myJson
 }
 
-//TODO: double check parse json errors
 export async function addClient(clientJson) {
     const response = await fetch(`http://localhost:8090/api/client`, {
         method: 'POST',
