@@ -66,9 +66,37 @@ router.use((request, response, next) => {
   })
 
   router.route('/clientEmployee').get((request, response) => {
-    let clientJsonFilters = request.body;
-    Db.getClientsForEmployee(clientJsonFilters.employeeID, clientJsonFilters.orderID,
-      clientJsonFilters.orderFName, clientJsonFilters.orderLName, clientJsonFilters.orderActive)
+    let orderID = request.query.orderID
+    let orderFName = request.query.orderFName;
+    let orderLName = request.query.orderLName;
+    let orderActive = request.query.orderActive
+    console.log(typeof orderActive);
+    if (orderID == ''){
+      orderID = null;
+    }
+    else {
+      orderID = Number(orderID);
+    }
+    if (orderFName == ''){
+      orderFName = null;
+    }
+    else {
+      orderFName = Number(orderFName);
+    }
+    if (orderLName == ''){
+      orderLName = null;
+    }
+    else {
+      orderLName = Number(orderLName);
+    }
+    if (orderActive == ''){
+      orderActive = null;
+    }
+    else {
+      orderActive = Number(orderActive);
+    }
+    console.log(orderActive);
+    Db.getClientsForEmployee(request.query.employeeID, orderID, orderFName, orderLName, orderActive)
     .then((data) => {
       response.json(data[0]);
     })

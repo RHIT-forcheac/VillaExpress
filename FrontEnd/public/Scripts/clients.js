@@ -19,6 +19,10 @@ export class ClientPageController {
 		this.startPage = 0;
 		this.currPage = 1;
 		this.endPage = 0;
+		this.idFilter = '';
+		this.fNameFilter = '';
+		this.lNameFilter = '';
+		this.activeFilter = '';
 		rhit.clientManager = new ClientManager();
 
 		document.querySelector("#submitAddClient").onclick = (event) => {
@@ -38,7 +42,6 @@ export class ClientPageController {
 				Email: document.querySelector("#inputEmail").value,
 				Active: document.querySelector("#inputClientActive").value,
 			}
-			console.log(inputJson);
 			rhit.clientManager.addClient(inputJson);
 			this.updateView();
 			location.reload();
@@ -63,7 +66,6 @@ export class ClientPageController {
 				Email: document.querySelector("#inputNewEmail").value,
 				Active: document.querySelector("#inputNewClientActive").value,
 			}
-			console.log(inputJson);
 			rhit.clientManager.editClientInfo(inputJson);
 			this.updateView();
 			location.reload();
@@ -83,25 +85,77 @@ export class ClientPageController {
 		document.querySelector("#nextPage").onclick = (event) => {
 			rhit.clientManager.targetPage += 1;
 			this.updateView();
-
 		}
 
 		document.querySelector("#lastPage").onclick = (event) => {
 			rhit.clientManager.targetPage = this.endPage;
 			this.updateView();
-
 		}
 
 		document.querySelector("#idFilterArrow").onclick = (event) => {
-			rhit.clientManager.filterID();
+			if (this.idFilter){
+				this.idFilter = 0;
+			}
+			else {
+				this.idFilter = 1;
+			}
+			rhit.clientManager.targetPage = null;
 			this.updateView();
-			location.reload();
+			//location.reload();
+		}
+
+		document.querySelector("#fNameFilterArrow").onclick = (event) => {
+			if (this.fNameFilter){
+				this.fNameFilter = 0;
+			}
+			else {
+				this.fNameFilter = 1;
+			}
+			rhit.clientManager.targetPage = null;
+			this.updateView();
+			//location.reload();
+		}
+
+		document.querySelector("#lNameFilterArrow").onclick = (event) => {
+			if (this.lNameFilter){
+				this.lNameFilter = 0;
+			}
+			else {
+				this.lNameFilter = 1;
+			}
+			rhit.clientManager.targetPage = null;
+			this.updateView();
+			//location.reload();
+		}
+
+		document.querySelector("#activeFilterArrow").onclick = (event) => {
+			console.log("Active filter button clicked");
+			console.log(this.activeFilter);
+			if (this.activeFilter == 1 || this.activeFilter == null){
+				console.log("Changing id filter to 0, desc");
+				this.activeFilter = 0;
+				console.log(this.activeFilter);
+			}
+			else {
+				this.activeFilter = 1;
+			}			
+			rhit.clientManager.targetPage = null;
+			this.updateView();
+			// var table = document.querySelector("#clientsTable");
+			// table.refresh();
 		}
 		this.updateView();
 	}
 
 	updateView() {
-		rhit.clientManager.getClients();
+		// console.log("filters");
+		// console.log(this.idFilter);
+		// console.log(this.fNameFilter);
+		// console.log(this.lNameFilter);
+		// console.log(this.activeFilter);
+
+		console.log("update view active filter", this.activeFilter);
+		rhit.clientManager.getClients(this.idFilter, this.fNameFilter, this.lNameFilter, this.activeFilter);
 
 		document.querySelector("#startPageTxt").innerText = 1
 		document.querySelector("#lastPageTxt").innerText = rhit.clientManager.pages;
@@ -115,21 +169,16 @@ class ClientManager {
 		this.targetConfirmedPage = 0;
 		this.maxRows = 12;
 		this.pages = 0;
-		this.idFilter = null;
-		this.fNameFilter = null;
-		this.lNameFilter = null;
-		this.activeFilter = null;
 	};
 
 	addClient = async function (clientJson) {
 		const addClientStatus = await addClient(clientJson);
-		console.log("client add status: ", addClientStatus);
 	};
 
-	getClients = async function () {
-		console.log("Emp id: ", rhit.employeeID);
-		const clientsListJson = await getClientsForEmployee(rhit.employeeID);
+	getClients = async function (idFilter, fNameFilter, lNameFilter, activeFilter) {
+		const clientsListJson = await getClientsForEmployee(rhit.employeeID, idFilter, fNameFilter, lNameFilter, activeFilter);
 		console.log(clientsListJson);
+		document.querySelector("#clientsTableBody").innerHTML = "";
 		let tableBody = document.querySelector("#clientsTable");
 		this.jsonToTbl(clientsListJson, tableBody);
 		let table = document.querySelector("#clientsTable");
@@ -197,18 +246,13 @@ class ClientManager {
 				document.querySelector("#inputNewPhoneNumber").value = currentClient.PhoneNumber;
 				document.querySelector("#inputNewEmail").value = currentClient.Email;
 				document.querySelector("#inputNewClientActive").value = currentClient.Active;
-				console.log("editing client");
 			})
 
 			deleteButton.on("click", function() {
 				let rowIndex = $(editButton).parent().data('index');   // jQuery
 				let currentClient = clientsJson[rowIndex];
 				let clientId = currentClient.ClientID;
-				console.log(rowIndex);
-				console.log(currentClient);
-				console.log(clientId);
 				deleteClient(clientId);
-				console.log("deleting client");
 				location.reload();
 			})
 
@@ -262,22 +306,6 @@ class ClientManager {
 			this.targetConfirmedPage = this.targetPage;
 		}
 	};
-
-	filterID = async function () {
-
-	}
-
-	filterFName = async function () {
-		
-	}
-
-	filterLName = async function () {
-		
-	}
-
-	filterActive = async function () {
-		
-	}
 
 	editClientInfo(clientJson) {
 		updateClient(clientJson)
