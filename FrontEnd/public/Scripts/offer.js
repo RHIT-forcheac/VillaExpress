@@ -29,12 +29,13 @@ export class OfferPageController {
                 Listing: this.listingID,
 				Client: document.querySelector("#inputClientID").value,
 			}
-			rhit.offerManager.addOffer(inputJson);
-			this.updateView();
-            location.reload();
+			rhit.offerManager.addOffer(inputJson).then((params) => {
+				rhit.offerManager.targetPage = null;
+				this.updateView();
+			});
 		};
 
-		document.querySelector("#submitEditOffer").onclick = (event) => {
+		document.querySelector("#submitEditOffer").onclick = async (event) => {
 			let offerId = document.querySelector("#editOfferDialogue").getAttribute("data-offerID");
             let clientId = document.querySelector("#inputNewClientID").value
             if (!clientId) {
@@ -47,10 +48,18 @@ export class OfferPageController {
                 Listing: this.listingID,
 				Client: clientId,
 			}
-            //TODO: Refactor for offer
-			rhit.offerManager.editOfferInfo(inputJson);
-			this.updateView();
-            location.reload();
+			await rhit.offerManager.editOfferInfo(inputJson).then((params) => {
+				rhit.offerManager.targetPage = null;
+				this.updateView();
+			});
+		};
+
+		document.querySelector("#submitDeleteOffer").onclick = async (event) => {
+			let offerID = document.querySelector("#deleteOfferDialogue").getAttribute("data-offerID");
+			await rhit.offerManager.deleteOffer(offerID).then((params) => {
+				rhit.offerManager.targetPage = null;
+				this.updateView();
+			});
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
@@ -136,6 +145,7 @@ class OfferManager {
 
 	addOffer = async function (offerJson) {
 		const addOfferStatus = await addOffer(offerJson);
+		return addOfferStatus;
 	};
 
 	getOffers = async function (listingID, idFilter, offerFilter) {
@@ -174,26 +184,23 @@ class OfferManager {
 			let editButton = $('<td/>').html(`<button id="offerEditBtn${i}" class="tblColCont offerEditBtn" type="button" data-toggle="modal"
 			data-target="#editOfferDialogue">
 			<span id="editIcon" class="material-symbols-outlined">edit</span></button>`);
-			let deleteButton = $('<td/>').html(`<button id="offerDeleteBtn${i}" class="tblColCont offerDeleteBtn" type="button">
+			let deleteButton = $('<td/>').html(`<button id="offerDeleteBtn${i}" class="tblColCont offerDeleteBtn" type="button"
+			data-toggle="modal"data-target="#deleteOfferDialogue">
 			<span id="deleteIcon" class="material-symbols-outlined">delete</span></button>`);
 
 			editButton.on("click", function() {
 				let rowIndex = $(editButton).parent().data('index');   // jQuery
 				let currentOffer = offersJson[rowIndex];
 				let modal = document.querySelector("#editOfferDialogue")
-                //TODO: Double check offerID matches json if errors
 				modal.setAttribute("data-offerID", currentOffer.OfferID)
 				document.querySelector("#inputNewOfferValue").value = currentOffer.Price;
-				// document.querySelector("#inputNewClientID").value = "";
 			})
 
 			deleteButton.on("click", function() {
-                //TODO: if this works double check clients.js and hange editButton here to deleteButton
-				let rowIndex = $(deleteButton).parent().data('index');   // jQuery
+                let rowIndex = $(deleteButton).parent().data('index'); 
 				let currentOffer = offersJson[rowIndex];
-				let offerId = currentOffer.OfferID;
-				deleteOffer(offerId).then(rhit.offerManager);
-                location.reload();
+				let modal = document.querySelector("#deleteOfferDialogue");
+				modal.setAttribute("data-offerID", currentOffer.OfferID);
 			})
 
 			row$.append(editButton);
@@ -253,6 +260,12 @@ class OfferManager {
 	};
 
 	editOfferInfo(offerJson) {
-		updateOffer(offerJson)
+		let editOfferStatus = updateOffer(offerJson);
+		return editOfferStatus;
+	}
+
+	deleteOffer = async function(offerID) {
+		let deleteOfferStatus = deleteOffer(offerID);
+		return deleteOfferStatus;
 	}
 }

@@ -271,11 +271,6 @@ class ClientManager {
 			})
 
 			deleteButton.on("click", function() {
-				// let rowIndex = $(editButton).parent().data('index');   // jQuery
-				// let currentClient = clientsJson[rowIndex];
-				// let clientId = currentClient.ClientID;
-				// deleteClient(clientId);
-				// rhit.clientManager.targetPage = null;
 				let rowIndex = $(deleteButton).parent().data('index'); 
 				let currentClient = clientsJson[rowIndex];
 				let modal = document.querySelector("#deleteClientDialogue");
