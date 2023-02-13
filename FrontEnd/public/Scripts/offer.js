@@ -54,32 +54,29 @@ export class OfferPageController {
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
-			rhit.offerManager.targetPage = this.startPage;
+			rhit.offerManager.targetPage = null;
 			this.updateView();
 		}
 
 		document.querySelector("#prevPage").onclick = (event) => {
-			if (rhit.offerManager.targetPage - 1 > 0){
+			if (rhit.offerManager.targetPage - 1 >= 0){
 				rhit.offerManager.targetPage -= 1;
 				this.updateView();
 			}
-			//rhit.offerManager.targetPage -= 1;
-			//this.updateView();
 		}
 
 		document.querySelector("#nextPage").onclick = (event) => {
-			if (rhit.offerManager.targetPage + 1 > rhit.offerManager.pages){
+			if (rhit.offerManager.targetPage + 1 < rhit.offerManager.pages){
 				rhit.offerManager.targetPage += 1;
 				this.updateView();
 			}
-			//rhit.offerManager.targetPage -= 1;
-			//this.updateView();
 		}
 
 		document.querySelector("#lastPage").onclick = (event) => {
-			rhit.offerManager.targetPage = this.endPage;
-			this.updateView();
-
+			if (rhit.offerManager.targetPage < rhit.offerManager.pages - 1){
+				rhit.offerManager.targetPage = rhit.offerManager.pages - 1;
+				this.updateView();
+			}
 		}
 
 		document.querySelector("#idFilterArrow").onclick = (event) => {
@@ -223,7 +220,6 @@ class OfferManager {
 	}
 
 	limitOffers() {
-		console.log("Target page: ", this.targetPage);
 		let table = document.querySelector("#offersTable");
 		let rowsInTable = table.rows;
 		if (this.targetPage == null){
@@ -238,17 +234,17 @@ class OfferManager {
 			this.targetPage = 0;
 			this.targetConfirmedPage = this.targetPage;
 		}
-		// else if (this.targetPage < 1 || this.targetPage > this.pages) {
-		// 	console.log("over edge dont return");
-		// 	return;
-		// }
 		else {
 			for (let i = this.targetPage * this.maxRows + 2; i < this.targetPage * this.maxRows + this.maxRows; i++) {
-				rowsInTable[i].style.display = "table-row";
+				if (rowsInTable[i]){
+					rowsInTable[i].style.display = "table-row";
+				}
 			}
 			if (this.targetPage != null){
 				for (let j = this.prevPage * this.maxRows + 1; j < this.prevPage * this.maxRows + this.maxRows; j++) {
-					rowsInTable[j].style.display = "none";
+					if (rowsInTable[j]){
+						rowsInTable[j].style.display = "none";
+					}
 				}
 			}
 			this.prevPage = this.targetPage;
@@ -257,7 +253,6 @@ class OfferManager {
 	};
 
 	editOfferInfo(offerJson) {
-        //TODO: change to offer when api function is implemented
 		updateOffer(offerJson)
 	}
 }

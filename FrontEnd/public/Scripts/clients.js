@@ -91,7 +91,6 @@ export class ClientPageController {
 
 		document.querySelector("#lastPage").onclick = (event) => {
 			if (rhit.clientManager.targetPage < rhit.clientManager.pages - 1){
-				console.log("Going to last page");
 				rhit.clientManager.targetPage = rhit.clientManager.pages - 1;
 				this.updateView();
 			}
@@ -301,9 +300,6 @@ class ClientManager {
 			this.targetPage = 0;
 			this.targetConfirmedPage = this.targetPage;
 		}
-		// else if (this.targetPage < 1 || this.targetPage > this.pages) {
-		// 	return;
-		// }
 		else {
 			for (let i = this.targetPage * this.maxRows + 2; i < this.targetPage * this.maxRows + this.maxRows; i++) {
 				if (rowsInTable[i]){
