@@ -143,8 +143,8 @@ export async function updateClient(clientJson) {
         },
         body: JSON.stringify(clientJson),
     });
-    const myJson = await response.json();
-    return myJson
+    //const myJson = await response.json();
+    return response
 }
 
 export async function updateOffer(offerJson) {
@@ -176,8 +176,8 @@ export async function deleteClient(clientID) {
             'Accept': '/*',
         },
     });
-    const myJson = await response.json();
-    return myJson
+    //const myJson = await response.json();
+    return response
 }
 
 export async function deleteListing(listingID) {
