@@ -93,68 +93,76 @@ export class ClientPageController {
 		}
 
 		document.querySelector("#idFilterArrow").onclick = (event) => {
-			if (this.idFilter){
-				this.idFilter = 0;
+			if (!this.idFilter){
+				this.idFilter = 1;
+				document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
 			}
 			else {
-				this.idFilter = 1;
+				this.idFilter = 0;
+				document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
 			}
 			rhit.clientManager.targetPage = null;
 			this.updateView();
-			//location.reload();
 		}
 
 		document.querySelector("#fNameFilterArrow").onclick = (event) => {
-			if (this.fNameFilter){
-				this.fNameFilter = 0;
+			if (!this.fNameFilter){
+				this.fNameFilter = 1;
+				document.querySelector("#fNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
 			}
 			else {
-				this.fNameFilter = 1;
+				this.fNameFilter = 0;
+				document.querySelector("#fNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
 			}
 			rhit.clientManager.targetPage = null;
 			this.updateView();
-			//location.reload();
 		}
 
 		document.querySelector("#lNameFilterArrow").onclick = (event) => {
-			if (this.lNameFilter){
-				this.lNameFilter = 0;
+			if (!this.lNameFilter){
+				this.lNameFilter = 1;
+				document.querySelector("#lNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
 			}
 			else {
-				this.lNameFilter = 1;
+				this.lNameFilter = 0;
+				document.querySelector("#lNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
 			}
 			rhit.clientManager.targetPage = null;
 			this.updateView();
-			//location.reload();
 		}
 
 		document.querySelector("#activeFilterArrow").onclick = (event) => {
-			console.log("Active filter button clicked");
-			console.log(this.activeFilter);
-			if (this.activeFilter == 1 || this.activeFilter == null){
-				console.log("Changing id filter to 0, desc");
-				this.activeFilter = 0;
-				console.log(this.activeFilter);
+			if (!this.activeFilter){
+				this.activeFilter = 1;
+				document.querySelector("#activeFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
 			}
 			else {
-				this.activeFilter = 1;
+				this.activeFilter = 0;
+				document.querySelector("#activeFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_more</span>';
 			}			
 			rhit.clientManager.targetPage = null;
 			this.updateView();
-			// var table = document.querySelector("#clientsTable");
-			// table.refresh();
+		}
+
+		document.querySelector("#resetFiltersBtn").onclick = (event) => {
+			this.idFilter = '';
+			this.fNameFilter = '';
+			this.lNameFilter = '';
+			this.activeFilter = '';
+			document.querySelector("#idFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			document.querySelector("#fNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			document.querySelector("#lNameFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';
+			document.querySelector("#activeFilterArrow").innerHTML = '<span class="material-symbols-outlined">expand_less</span>';	
+			rhit.clientManager.targetPage = null;
+			this.updateView();
 		}
 		this.updateView();
 	}
 
 	updateView() {
-		// console.log("filters");
-		// console.log(this.idFilter);
-		// console.log(this.fNameFilter);
-		// console.log(this.lNameFilter);
-		// console.log(this.activeFilter);
+		console.log("filters");
+		console.log(this.idFilter);
 
-		console.log("update view active filter", this.activeFilter);
 		rhit.clientManager.getClients(this.idFilter, this.fNameFilter, this.lNameFilter, this.activeFilter);
 
 		document.querySelector("#startPageTxt").innerText = 1
