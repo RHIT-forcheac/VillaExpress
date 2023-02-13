@@ -29,6 +29,11 @@ body {
     width: 50px;
 }
 
+#villaLogoHomePage {
+    height: 200px;
+    width: 200px;
+}
+
 #addClientFab:active {
     opacity: 0.8;
     transform: translateY(2px);
@@ -144,4 +149,28 @@ body {
     background-color: #212527;
     color: white;
     margin-bottom: 5px;
+}
+
+#homePage {
+    text-align: center;
+    background-color: #373636D0;
+}
+
+#homePageBody {
+    text-align: center;
+    background-image: url("../images/homeBackground.jpg");
+}
+
+#homeScreenTitle {
+    font-size: 44px;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin-top: 50px;
+  }
+
+#homeScreenSubTitle {
+    font-size: 30px;
+    font-family: "Times New Roman", Times, serif;
+        color: white;
+    margin-top: 20px;
 }
