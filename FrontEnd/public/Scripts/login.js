@@ -41,9 +41,8 @@ class LoginRegisterManager {
 		const loginStatusArr = await loginUser(username, password);
 		console.log("login status: ", loginStatusArr[0]);
 		if (!!loginStatusArr[0]) {
-			rhit.currentUser = await getEmployeeByID(loginStatusArr[1]);
-			window.location.href = "../homeScreen.html"
-            //new NavBarController();
+			//let employeeJSON = await getEmployeeByID(loginStatusArr[1]);
+			window.location.href = `../homeScreen.html?employeeID=${loginStatusArr[1]}`
 		}
 		return loginStatusArr[0];
 	};

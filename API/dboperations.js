@@ -33,7 +33,7 @@ async function getOffersByListing(listingID) {
             .input('listingID', sql.Int, listingID)
             .execute('getOffersByListing');
         return newOffersList.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -56,7 +56,7 @@ async function getClients() {
         let newClientsList = await pool.request()
             .execute('getClients');
         return newClientsList.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -79,7 +79,20 @@ async function getListings() {
         let newListingsList = await pool.request()
             .execute('getListings');
         return newListingsList.recordsets;
-    } catch (err) {        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getOfferCountFromListing(listingID) {
+    try {
+        let pool = await sql.connect(config);
+        let newOfferCount = await pool.request()
+            .input('ListingID', sql.Int, listingID)
+            .output('OfferCount', sql.Int)
+            .execute('getOfferCountFromListing');
+        return newOfferCount.output.OfferCount;
+    } catch (err) {
         console.log(err);
     }
 }
@@ -98,23 +111,23 @@ async function addClient(fName, lName, dob, phoneNumber, address, email, active)
             .input('active', sql.Bit, active)
             .execute('addClient');
         return newClient.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
 
-async function addListing(EmployeeAssignDate, CloseDate, PostDate, Address, State) {
+async function addListing(EmployeeID, PostDate, Address) {
     try {
         let pool = await sql.connect(config);
         let newListing = await pool.request()
-            .input('EmployeeAssignDate', sql.Date, EmployeeAssignDate)
-            .input('CloseDate', sql.Date, CloseDate)
+            .input('EmployeeID', sql.Int, EmployeeID)
+            .input('CloseDate', sql.Date, null)
             .input('PostDate', sql.Date, PostDate)
             .input('Address', sql.VarChar, Address)
-            .input('State', sql.VarChar, State)
+            .input('State', sql.Bit, 1)
             .execute('addListing');
         return newListing.recordsets;
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }
@@ -128,7 +141,7 @@ async function addOffer(price, listing, client) {
             .input('Client', sql.Int, client)
             .execute('addOffer');
         return newOffer.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -147,7 +160,7 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
             .input('active', sql.Bit, active)
             .execute('updateClient');
         return newClient.recordsets;
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }
@@ -162,7 +175,7 @@ async function updateOffer(offerID, price, listing, client) {
             .input('client', sql.Int, client)
             .execute('updateOffer');
         return updatedOffer.recordsets;
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }
@@ -174,7 +187,7 @@ async function deleteListing(listingID) {
             .input('listingID', sql.Int, listingID)
             .execute('deleteListing');
         return listingDeleted.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -186,7 +199,7 @@ async function deleteClient(clientID) {
             .input('clientID', sql.Int, clientID)
             .execute('deleteClient');
         return clientDeleted.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -198,7 +211,7 @@ async function deleteOffer(offerID) {
             .input('OfferID', sql.Int, offerID)
             .execute('deleteOffer');
         return offerDeleted.recordsets;
-    } catch (err) {        
+    } catch (err) {
         console.log(err);
     }
 }
@@ -231,7 +244,7 @@ async function loginUser(username, password) {
             .execute('logInUser')
         return [loginStatus.output.result, loginStatus.output.employeeID];
     } catch (err) {
-        console.log("login user failed", err, "username:" +  username, "passwordHash:" + password);
+        console.log("login user failed", err, "username:" + username, "passwordHash:" + password);
     }
 }
 
@@ -249,12 +262,13 @@ module.exports = {
     getClientByID: getClientByID,
     getClients: getClients,
     getListingByID: getListingByID,
-    getListings: getListings, 
+    getListings: getListings,
+    getOfferCountFromListing: getOfferCountFromListing,
     addClient: addClient,
     addListing: addListing,
     addOffer: addOffer,
     updateClient: updateClient,
-    updateOffer: updateOffer, 
+    updateOffer: updateOffer,
     deleteClient: deleteClient,
     deleteListing: deleteListing,
     deleteOffer: deleteOffer,

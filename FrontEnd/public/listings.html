@@ -29,112 +29,72 @@
             <a class="nav-link" href="#">Firm</a>
         </li>
         <div class="dropdown pull-xs-right">
-            <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">more_vert</i>
+            <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">more_vert</i>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
-              <button id="menuSignOut" class="dropdown-item" type="button" data-toggle="button" data-target="#deleteQuoteDialog">
-                  <i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Sign Out</button>
+                <button id="menuSignOut" class="dropdown-item" type="button" data-toggle="button"
+                    data-target="#deleteQuoteDialog">
+                    <i class="material-icons">login</i>&nbsp;&nbsp;&nbsp;Sign Out</button>
             </div>
-          </div>
+        </div>
     </ul>
     <div id="listingsPage" class="container page-container">
 
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
+    <button id="addListingFab" type="button" class="btn bmd-btn-fab" data-toggle="modal"
+        data-target="#addListingDialogue">
+        <i class="material-icons">add</i>
+    </button>
+
+    <div class="modal fade" id="addListingDialogue" tabindex="-1" role="dialog" aria-labelledby="Add listing dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Listing</h5>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-7">
+                                <label for="inputStreetAddress">Street Address</label>
+                                <input type="text" class="form-control" id="inputStreetAddress">
+                            </div>
+                            <div class="form-group col-5">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-2">
+                                <label for="inputState">State</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Indiana</option>
+                                    <option>Ohio</option>
+                                    <option>Michigan</option>
+                                    <option>Illinois</option>
+                                    <option>Kentucky</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./images/testImage.jpg" alt="house">
-                    <div class="card-body">
-                        <h5 class="card-title">4762 Clearview Drive, Brighton, CO</h5>
-                        <p class="card-text">A mid century modern home in the suburbs. Including 3 bedrooms, 2 baths,
-                            and a
-                            basement.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        <button type="button" class="btn btn-primary">
-                            Offers <span class="badge badge-pill badge-success">4</span>
-                        </button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="submitAddListing" type="button" class="btn btn-primary" data-dismiss="modal">Add
+                        Listing</button>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
     <script src="scripts/jquery.min.js"></script>
@@ -148,4 +108,5 @@
     <script src="/__/firebase/init.js"></script>
     <script type="module" src="./Scripts/main.js"></script>
 </body>
+
 </html>
