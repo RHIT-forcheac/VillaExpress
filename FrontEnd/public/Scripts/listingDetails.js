@@ -5,6 +5,7 @@ import {
 	getListingByID,
 	closeListing,
 	deleteListing,
+	updateListing,
 } from "./apiFunctions.js"
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -27,14 +28,14 @@ export class DetailPageController {
 		};
 
 		document.querySelector("#submitEditListing").onclick = (event) => {
-			const inputJson = {
-                OfferID: offerId,
-				Price: document.querySelector("#inputNewOfferValue").value,
-                Listing: this.listingID,
-				Client: clientId,
+			const addressJson = {
+				streetAddress: document.querySelector("#inputNewStreetAddress").value,
+				city: document.querySelector("#inputNewCity").value,
+				state: document.querySelector("#inputNewState").value,
+				zip: document.querySelector("#inputNewZip").value,
 			}
-            //TODO: Refactor for offer
-			rhit.offerManager.editOfferInfo(inputJson);
+			const addressStr = `${addressJson.streetAddress}, ${addressJson.city}, ${addressJson.state}, ${addressJson.zip}`
+			rhit.detailManager.editCurrentListing(this.listingID, addressStr);
 			this.updateView();
             location.reload();
 		};
@@ -59,8 +60,8 @@ class DetailManager {
 		this.listingID = listingID;
 	}
 
-	editCurrentListing = async function () {
-		
+	editCurrentListing = async function (listingID, address) {
+		await updateListing(listingID, address)
 	}
 
 	deleteCurrentListing = async function () {
