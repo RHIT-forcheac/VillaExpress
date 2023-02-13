@@ -6,6 +6,7 @@ import {
 	getListings,
 	getOfferCountFromListing,
 	addListing,
+	getListingsForEmployee,
 } from "./apiFunctions.js"
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -55,7 +56,7 @@ class ListingPageManager {
 	}
 
 	getListings = async function () {
-		const listingsJson = await getListings();
+		const listingsJson = await getListingsForEmployee(rhit.employeeID);
 		return listingsJson;
 	}
 
