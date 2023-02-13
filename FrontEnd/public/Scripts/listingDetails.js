@@ -3,6 +3,7 @@ var rhit = rhit || {};
 import {
 	getEmployeeByID,
 	getListingByID,
+	closeListing,
 } from "./apiFunctions.js"
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -19,7 +20,7 @@ export class DetailPageController {
 		rhit.detailManager = new DetailManager(rhit.employeeID, this.listingID);
 
 		document.querySelector("#closeListingButton").onclick = (event) => {
-			rhit.detailManager.closeListing();
+			rhit.detailManager.closeCurrentListing();
 			this.updateView();
 		    location.reload();
 		};
@@ -38,8 +39,10 @@ class DetailManager {
 		this.listingID = listingID;
 	}
 
-	closeListing = async function () {
-		
+	closeCurrentListing = async function () {
+		let closeDate = new Date();
+		console.log(closeDate);
+		await closeListing(this.listingID, closeDate);
 	}
 
 	getAssignedEmployee = async function () {
