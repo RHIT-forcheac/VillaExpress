@@ -133,3 +133,8 @@ body {
 }.nav-link {
     background-color: #4C6085;
 }
+
+#logoutVert {
+    margin-left: auto; 
+    margin-right: 0;
+}
