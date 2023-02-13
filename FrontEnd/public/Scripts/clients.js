@@ -16,7 +16,6 @@ rhit.employeeID = urlParams.get("employeeID");
 export class ClientPageController {
 	constructor() {
 
-		this.startPage = 0;
 		this.currPage = 1;
 		this.endPage = 0;
 		this.idFilter = '';
@@ -72,24 +71,30 @@ export class ClientPageController {
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
-			rhit.clientManager.targetPage = this.startPage;
+			rhit.clientManager.targetPage = null;
 			this.updateView();
 		}
 
 		document.querySelector("#prevPage").onclick = (event) => {
-			rhit.clientManager.targetPage -= 1;
-			this.updateView();
-
+			if (rhit.clientManager.targetPage - 1 >= 0){
+				rhit.clientManager.targetPage -= 1;
+				this.updateView();
+			}
 		}
 
 		document.querySelector("#nextPage").onclick = (event) => {
-			rhit.clientManager.targetPage += 1;
-			this.updateView();
+			if (rhit.clientManager.targetPage + 1 < rhit.clientManager.pages){
+				rhit.clientManager.targetPage += 1;
+				this.updateView();
+			}
 		}
 
 		document.querySelector("#lastPage").onclick = (event) => {
-			rhit.clientManager.targetPage = this.endPage;
-			this.updateView();
+			if (rhit.clientManager.targetPage < rhit.clientManager.pages - 1){
+				console.log("Going to last page");
+				rhit.clientManager.targetPage = rhit.clientManager.pages - 1;
+				this.updateView();
+			}
 		}
 
 		document.querySelector("#idFilterArrow").onclick = (event) => {
@@ -160,9 +165,7 @@ export class ClientPageController {
 	}
 
 	updateView() {
-		console.log("filters");
-		console.log(this.idFilter);
-
+		console.log(rhit.clientManager.pages);
 		rhit.clientManager.getClients(this.idFilter, this.fNameFilter, this.lNameFilter, this.activeFilter);
 
 		document.querySelector("#startPageTxt").innerText = 1
@@ -192,6 +195,7 @@ class ClientManager {
 		let rowsInTableLen = table.rows.length; 
 		if (this.targetPage == null){
 			this.pages = Math.ceil(rowsInTableLen / this.maxRows);
+			console.log(this.pages);
 			document.querySelector("#lastPageTxt").innerText = Math.ceil(rowsInTableLen / this.maxRows);
 		}
 		this.limitClients();
@@ -297,16 +301,20 @@ class ClientManager {
 			this.targetPage = 0;
 			this.targetConfirmedPage = this.targetPage;
 		}
-		else if (this.targetPage < 1 || this.targetPage > this.pages) {
-			return;
-		}
+		// else if (this.targetPage < 1 || this.targetPage > this.pages) {
+		// 	return;
+		// }
 		else {
 			for (let i = this.targetPage * this.maxRows + 2; i < this.targetPage * this.maxRows + this.maxRows; i++) {
-				rowsInTable[i].style.display = "table-row";
+				if (rowsInTable[i]){
+					rowsInTable[i].style.display = "table-row";
+				}
 			}
 			if (this.targetPage != null){
 				for (let j = this.prevPage * this.maxRows + 1; j < this.prevPage * this.maxRows + this.maxRows; j++) {
-					rowsInTable[j].style.display = "none";
+					if (rowsInTable[j]){
+						rowsInTable[j].style.display = "none";
+					}
 				}
 			}
 			this.prevPage = this.targetPage;

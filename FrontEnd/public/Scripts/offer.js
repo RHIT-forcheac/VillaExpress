@@ -59,15 +59,21 @@ export class OfferPageController {
 		}
 
 		document.querySelector("#prevPage").onclick = (event) => {
-			rhit.offerManager.targetPage -= 1;
-			this.updateView();
-
+			if (rhit.offerManager.targetPage - 1 > 0){
+				rhit.offerManager.targetPage -= 1;
+				this.updateView();
+			}
+			//rhit.offerManager.targetPage -= 1;
+			//this.updateView();
 		}
 
 		document.querySelector("#nextPage").onclick = (event) => {
-			rhit.offerManager.targetPage += 1;
-			this.updateView();
-
+			if (rhit.offerManager.targetPage + 1 > rhit.offerManager.pages){
+				rhit.offerManager.targetPage += 1;
+				this.updateView();
+			}
+			//rhit.offerManager.targetPage -= 1;
+			//this.updateView();
 		}
 
 		document.querySelector("#lastPage").onclick = (event) => {
@@ -115,6 +121,7 @@ export class OfferPageController {
 	}
 
 	updateView() {
+		console.log(rhit.offerManager.targetPage);
 		rhit.offerManager.getOffers(this.listingID, this.idFilter, this.offerFilter);
 		document.querySelector("#startPageTxt").innerText = 1
 		document.querySelector("#lastPageTxt").innerText = rhit.offerManager.pages;
@@ -216,6 +223,7 @@ class OfferManager {
 	}
 
 	limitOffers() {
+		console.log("Target page: ", this.targetPage);
 		let table = document.querySelector("#offersTable");
 		let rowsInTable = table.rows;
 		if (this.targetPage == null){
@@ -230,9 +238,10 @@ class OfferManager {
 			this.targetPage = 0;
 			this.targetConfirmedPage = this.targetPage;
 		}
-		else if (this.targetPage < 1 || this.targetPage > this.pages) {
-			return;
-		}
+		// else if (this.targetPage < 1 || this.targetPage > this.pages) {
+		// 	console.log("over edge dont return");
+		// 	return;
+		// }
 		else {
 			for (let i = this.targetPage * this.maxRows + 2; i < this.targetPage * this.maxRows + this.maxRows; i++) {
 				rowsInTable[i].style.display = "table-row";
