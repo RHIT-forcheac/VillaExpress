@@ -84,18 +84,14 @@ class DetailManager {
 	populateCards = async function () {
 		let employeeJsonRaw = await this.getAssignedEmployee();
 		let employeeJSON = employeeJsonRaw[0];
-		console.log(employeeJSON);
-		console.log("Employee: ", employeeJSON);
 		let listingDetailsJsonRaw = await this.getListingDetails();
 		let listingDetailsJSON = listingDetailsJsonRaw[0];
-		console.log("Listing: ", listingDetailsJSON);
 
 		document.querySelector("#employeeUsername").innerHTML += employeeJSON.Username
 		document.querySelector("#employeeName").innerHTML += employeeJSON.FName + " " + employeeJSON.LName
 
 		var newPostDate = new Date(listingDetailsJSON.PostDate);
 		let newPostDateFinal = new Intl.DateTimeFormat('en-US').format(newPostDate);
-		let newCloseDateFinal;
 
 		if (!listingDetailsJSON.CloseDate) {
 			document.querySelector("#closeDate").innerHTML += "Currently Active";
@@ -109,7 +105,7 @@ class DetailManager {
 		document.querySelector("#postDate").innerHTML += newPostDateFinal;
 
 		document.querySelector('#address').innerHTML += listingDetailsJSON.Address;
-		document.querySelector('#description').innerHTML += "Desc can go here when DB is updated";
+		// document.querySelector('#description').innerHTML += "Desc can go here when DB is updated";
 		
 	}
 }
