@@ -41,7 +41,7 @@ export class ClientPageController {
 				Email: document.querySelector("#inputEmail").value,
 				Active: document.querySelector("#inputClientActive").value,
 			}
-			await rhit.clientManager.addClient(inputJson);
+			await rhit.clientManager.addClient(inputJson, rhit.employeeID);
 			rhit.clientManager.targetPage = null;
 			this.updateView();
 		};
@@ -188,8 +188,8 @@ class ClientManager {
 		this.pages = 0;
 	};
 
-	addClient = async function (clientJson) {
-		const addClientStatus = await addClient(clientJson);
+	addClient = async function (clientJson, employeeID) {
+		const addClientStatus = await addClient(clientJson, employeeID);
 	};
 
 	getClients = async function (idFilter, fNameFilter, lNameFilter, activeFilter) {
