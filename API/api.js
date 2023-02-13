@@ -147,8 +147,14 @@ router.use((request, response, next) => {
   })
 
   router.route('listing/:listingID').delete((request, response) => {
-    console.log(request.params.listingID);
     Db.deleteListing(request.params.listingID)
+    .then((data) => {
+      response.json(data[0]);
+    })    
+  })
+
+  router.route('/closeListing/:listingID:closeDate').put((request, response) => {
+    Db.closeListing(request.params.listingID, request.params.closeDate)
     .then((data) => {
       response.json(data[0]);
     })    

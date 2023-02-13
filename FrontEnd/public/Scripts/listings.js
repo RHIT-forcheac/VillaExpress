@@ -70,6 +70,8 @@ class ListingPageManager {
 		const newCard = document.createElement("div");
 		newCard.className = "card";
 		newCard.style = "width: 18rem;";
+		newCard.style = "height: 14rem;";
+
 
 		// const newImage = document.createElement("img");
 		// newImage.className = "card-img-top";
@@ -93,7 +95,7 @@ class ListingPageManager {
 
 		newDetailsButton.onclick = ((event) => {
 			console.log("Details clicked for listing: ", currentListing.ListingID);
-			window.location.href = `../listingDetails.html?listingID=${currentListing.ListingID}`;
+			window.location.href = `../listingDetails.html?listingID=${currentListing.ListingID}&employeeID=${rhit.employeeID}`;
 		})
 
 		let newOffersButton = document.createElement("button");

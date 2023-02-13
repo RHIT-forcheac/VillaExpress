@@ -216,6 +216,20 @@ async function deleteOffer(offerID) {
     }
 }
 
+async function closeListing(listingID, closeDate) {
+    try {
+        let pool = await sql.connect(config);
+        let updatedListing = await pool.request()
+            .input('ID', sql.Int, listingID)
+            .input('closeDate', sql.Date, closeDate)
+            .input('state', sql.Bit, 0)
+            .execute('updateListing');
+        return updatedListing.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 async function registerNewUser(username, password) {
     try {
         var salt = getNewSalt();
@@ -342,6 +356,7 @@ module.exports = {
     getListings: getListings, 
     deleteListing: deleteListing,
     deleteOffer: deleteOffer,
+    closeListing: closeListing,
     registerNewUser: registerNewUser,
     loginUser: loginUser,
 }
