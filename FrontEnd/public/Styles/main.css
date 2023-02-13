@@ -34,7 +34,7 @@ body {
     transform: translateY(2px);
 }
 
-#addClientFab, #addOfferFab {
+#addClientFab, #addOfferFab, #addListingFab {
     bottom: 10px;
     background: #A1D2CE;
     color: black;

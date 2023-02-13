@@ -7,11 +7,13 @@ import {OfferPageController} from "./offer.js"
 import { DetailPageController } from "./listingDetails.js";
 
 rhit.navBarManager = null;
+rhit.employeeID = null;
 
 export class NavBarController{
 	constructor() {
 		rhit.navBarManager = new NavBarManager();
         //rhit.currentPage = 'homePage'
+		console.log(rhit.currentUser);
 
         //TODO: Build on clicks for navbar links
 		document.querySelector("#homePageButton").onclick = (event) => {
@@ -30,7 +32,7 @@ export class NavBarController{
 
         document.querySelector("#listingsPageButton").onclick = (event) => {
 			//TODO: Navigate to proper page and construct correct controller
-			window.location.href = "../listings.html";
+			window.location.href = `../listings.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
@@ -57,7 +59,7 @@ export function checkForRedirects() {
 	if (document.querySelector("#loginPage") && rhit.currentUser) {
 		window.location.href = "../homeScreen.html";
 	}
-	if (!document.querySelector("#loginPage") && !!rhit.currentUser) {
+	if (!document.querySelector("#loginPage") && !! rhit.currentUser) {
 		window.location.href = "/";
 	}
 };
@@ -67,6 +69,7 @@ export function initializePage() {
 
 	if(document.querySelector("#homePage")){
 		console.log("You are on the home page");
+		rhit.employeeID = urlParams.get("employeeID");
 		new NavBarController();
 	}
 
@@ -77,7 +80,8 @@ export function initializePage() {
 
 	if(document.querySelector("#listingsPage")){
 		console.log("You are on the listings page");
-		new ListingPageController();
+		const employeeID = urlParams.get("employeeID");
+		new ListingPageController(employeeID);
 	}
 
 	if(document.querySelector("#firmPage")){
