@@ -5,6 +5,7 @@ var rhit = rhit || {};
 
 import {
 	getListings,
+	getOfferCountFromListing,
 } from "./apiFunctions.js"
 
 rhit.listingPageManager = null;
@@ -30,7 +31,7 @@ class ListingPageManager {
 		return listingsJson;
 	}
 
-	createCard = function(currentRow, currentListing) {
+	createCard = async function(currentRow, currentListing) {
 		const newCol = document.createElement("div");
 		newCol.className = "col";
 
@@ -75,7 +76,7 @@ class ListingPageManager {
 		const newIconCounter = document.createElement("span");
 		newIconCounter.className = "badge badge-pill badge-success";
 		//TODO: implement offers and replace with actual number
-		newIconCounter.innerHTML = "4"
+		newIconCounter.innerHTML = await getOfferCountFromListing(currentListing.ListingID);
 
 		newOffersButton.appendChild(newIconCounter);
 		newCardBody.appendChild(newAddress);
