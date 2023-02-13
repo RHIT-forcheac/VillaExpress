@@ -85,8 +85,8 @@ class ListingPageManager {
 		newAddress.className = "card-title";
 		newAddress.innerHTML = currentListing.Address;
 
-		const newDescription = document.createElement("p");
-		newDescription.innerText = "Description of the lovely home";
+		// const newDescription = document.createElement("p");
+		// newDescription.innerText = "Description of the lovely home";
 
 		let newDetailsButton = document.createElement("button");
 		newDetailsButton.type = "button";
@@ -113,7 +113,7 @@ class ListingPageManager {
 
 		newOffersButton.appendChild(newIconCounter);
 		newCardBody.appendChild(newAddress);
-		newCardBody.appendChild(newDescription);
+		// newCardBody.appendChild(newDescription);
 		newCardBody.appendChild(newDetailsButton);
 		newCardBody.appendChild(newOffersButton);
 		// newCard.appendChild(newImage);

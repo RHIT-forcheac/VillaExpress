@@ -115,13 +115,13 @@ body {
 }
 
 #editListing, #deleteListing {
-    height: 7rem;
-    width: 7rem;
+    height: 5rem;
+    width: 5rem;
 }
 
 #listingDetailsCard, #employeeDetailsCard, 
 #listingStatusCard, #editDeleteCard {
-    height: 14rem;
+    height: 11rem;
     width: 18rem;
 }
 
