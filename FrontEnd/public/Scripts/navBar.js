@@ -1,5 +1,8 @@
 var rhit = rhit || {};
 
+//TODO: fix naviagtion from details and offers back to main
+//	currently is showing employeeID as null
+
 import {LoginPageController} from "./login.js";
 import {ClientPageController} from "./clients.js";
 import {ListingPageController} from "./listings.js"
@@ -19,14 +22,14 @@ export class NavBarController{
 		document.querySelector("#homePageButton").onclick = (event) => {
 			//TODO: Navigate to proper page and construct correct controller
 			console.log("home clicked");
-			window.location.href = "../homeScreen.html";
+			window.location.href = `../homeScreen.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
 		document.querySelector("#clientsPageButton").onclick = (event) => {
             //TODO: Navigate to proper page and construct correct controller
 			console.log("clients clicked");
-			window.location.href = "../clients.html";
+			window.location.href = `../clients.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 
@@ -38,7 +41,7 @@ export class NavBarController{
 
         document.querySelector("#firmPageButton").onclick = (event) => {
 			//TODO: Navigate to proper page and construct correct controller
-			window.location.href = "../firm.html";
+			window.location.href = `../firm.html?employeeID=${rhit.employeeID}`;
 			this.initializePage();
 		};
 	}
@@ -75,17 +78,20 @@ export function initializePage() {
 
 	if(document.querySelector("#clientsMainPage")){
 		console.log("You are on the clients page");
+		new NavBarController();
 		new ClientPageController();
 	}
 
 	if(document.querySelector("#listingsPage")){
 		console.log("You are on the listings page");
 		const employeeID = urlParams.get("employeeID");
+		new NavBarController();
 		new ListingPageController(employeeID);
 	}
 
 	if(document.querySelector("#firmPage")){
 		console.log("You are on the firm page");
+		new NavBarController();
 		//TODO: Add firm controller when page is finished
 		//new ClientPageController();
 	}
@@ -93,12 +99,14 @@ export function initializePage() {
 	if(document.querySelector("#offersPage")){
 		console.log("You are on the offers page");
 		const listingID = urlParams.get("listingID");
+		new NavBarController();
 		new OfferPageController(listingID);
 	}
 
 	if(document.querySelector("#detailPage")){
 		console.log("You are on the details page");
 		const listingID = urlParams.get("listingID");
+		new NavBarController();
 		new DetailPageController(listingID);
 	}
 
