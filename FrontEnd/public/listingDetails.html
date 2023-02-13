@@ -2,20 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <title>VillaExpress</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>VillaExpress</title>
 </head>
 
 <body>
     <ul id="navBar" class="nav nav-tabs">
         <li class="nav-item">
             <img id="villaLogo" src="./images/villa.png" alt="villa logo">
-          </li>
+        </li>
         <li class="nav-item">
             <button id="homePageButton" type="button" class="nav-link">VillaExpress</a>
         </li>
@@ -31,67 +47,69 @@
 
     </ul>
 
-  <div id="detailPage" class="container page-container">
+    <div id="detailPage" class="container page-container">
 
-    <div class="row">
-        <div class="col">
-            <div id="employeeDetailsCard" class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Employee</h5>
-                    <p id="employeeUsername" class="card-text">Username: </p>
-                    <p id="employeeName" class="card-text">Name: </p>
+        <div class="row">
+            <div class="col">
+                <div id="employeeDetailsCard" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee</h5>
+                        <p id="employeeUsername" class="card-text">Username: </p>
+                        <p id="employeeName" class="card-text">Name: </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id="listingStatusCard" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Listing Status</h5>
+                        <p id="postDate" class="card-text">Post Date: </p>
+                        <p id="closeDate" class="card-text">Close Date: </p>
+                        <button id="closeListingButton" type="button" class="btn btn-primary">
+                            Close Listing
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div id="listingStatusCard" class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Listing Status</h5>
-                    <p id="postDate" class="card-text">Post Date: </p>
-                    <p id="closeDate" class="card-text">Close Date: </p>
-                    <button id="closeListingButton" type="button" class="btn btn-primary">
-                        Close Listing 
-                    </button>
+
+        <div class="row">
+            <div class="col">
+                <div id="listingDetailsCard" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Listing Info</h5>
+                        <p id="address" class="card-text">Address: </p>
+                        <p id="description" class="card-text">Description: </p>
+                    </div>
                 </div>
             </div>
+            <div class="col">
+                <div id="clientDetailsCard" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit and Delete</h5>
+                        <button id="editListing" class="tblColCont listingEditBtn" type="button" data-toggle="modal"
+                            data-target="#editListingDialogue">
+                            <span id="editIcon" class="material-symbols-outlined">edit</span></button>
+                        <button id="deleteListing" class="tblColCont listingDeleteBtn" type="button">
+                            <span id="deleteIcon" class="material-symbols-outlined">delete</span></button>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
-    <div class="row">
-        <div class="col">
-            <div id="listingDetailsCard" class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Listing Info</h5>
-                    <p id="address" class="card-text">Address: </p>
-                    <p id="description" class="card-text">Description: </p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <!-- <div id="clientDetailsCard" class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Client</h5>
-                    <p class="card-text">Name: </p>
-                    <p class="card-text">Phone: </p>
-                    <p class="card-text">Email: </p>
-                </div>
-            </div> -->
-        </div>
-        
-    </div>
-
-  </div>
-
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/popper.js"></script>
-  <script src="scripts/bootstrap-material-design.js"></script>
-  <script>
-    $("body").bootstrapMaterialDesign();
-  </script>
-  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
-  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
-  <script src="/__/firebase/init.js"></script>
-  <script type="module" src="./Scripts/main.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/popper.js"></script>
+    <script src="scripts/bootstrap-material-design.js"></script>
+    <script>
+        $("body").bootstrapMaterialDesign();
+    </script>
+    <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script type="module" src="./Scripts/main.js"></script>
 </body>
 
 </html>
