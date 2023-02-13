@@ -65,7 +65,7 @@ class ListingPageManager {
 
 	createCard = async function (currentRow, currentListing) {
 		const newCol = document.createElement("div");
-		newCol.className = "col";
+		newCol.className = "col-4";
 
 		const newCard = document.createElement("div");
 		newCard.className = "card";
