@@ -91,6 +91,12 @@ export class ClientPageController {
 			this.updateView();
 
 		}
+
+		document.querySelector("#idFilterArrow").onclick = (event) => {
+			rhit.clientManager.filterID();
+			this.updateView();
+			location.reload();
+		}
 		this.updateView();
 	}
 
@@ -109,6 +115,10 @@ class ClientManager {
 		this.targetConfirmedPage = 0;
 		this.maxRows = 12;
 		this.pages = 0;
+		this.idFilter = null;
+		this.fNameFilter = null;
+		this.lNameFilter = null;
+		this.activeFilter = null;
 	};
 
 	addClient = async function (clientJson) {
@@ -252,6 +262,22 @@ class ClientManager {
 			this.targetConfirmedPage = this.targetPage;
 		}
 	};
+
+	filterID = async function () {
+
+	}
+
+	filterFName = async function () {
+		
+	}
+
+	filterLName = async function () {
+		
+	}
+
+	filterActive = async function () {
+		
+	}
 
 	editClientInfo(clientJson) {
 		updateClient(clientJson)
