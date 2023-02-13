@@ -1,8 +1,5 @@
 var rhit = rhit || {};
 
-//TODO: fix naviagtion from details and offers back to main
-//	currently is showing employeeID as null
-
 import {LoginPageController} from "./login.js";
 import {ClientPageController} from "./clients.js";
 import {ListingPageController} from "./listings.js"

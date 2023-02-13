@@ -103,6 +103,13 @@ router.use((request, response, next) => {
     })    
   })
 
+  router.route('/employeeListings/:employeeID').get((request, response) => {
+    Db.getListingsForEmployee(request.params.employeeID)
+    .then((data) => {
+      response.json(data[0]);
+    })    
+  })
+
   router.route('/listing/:listingID').get((request, response) => {
     Db.getListingByID(request.params.listingID)
     .then((data) => {

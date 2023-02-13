@@ -84,6 +84,18 @@ async function getListings() {
     }
 }
 
+async function getListingsForEmployee(employeeID) {
+    try {
+        let pool = await sql.connect(config);
+        let newEmployeeListings = await pool.request()
+            .input('EmployeeID', sql.Int, employeeID)
+            .execute('getListingsByEmployeeID');
+        return newEmployeeListings.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 async function getOfferCountFromListing(listingID) {
     try {
         let pool = await sql.connect(config);
@@ -290,6 +302,7 @@ module.exports = {
     getClients: getClients,
     getListingByID: getListingByID,
     getListings: getListings,
+    getListingsForEmployee: getListingsForEmployee,
     getOfferCountFromListing: getOfferCountFromListing,
     addClient: addClient,
     addListing: addListing,
