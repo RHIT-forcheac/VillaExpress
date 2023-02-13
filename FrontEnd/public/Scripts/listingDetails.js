@@ -4,6 +4,7 @@ import {
 	getEmployeeByID,
 	getListingByID,
 	closeListing,
+	deleteListing,
 } from "./apiFunctions.js"
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -25,6 +26,18 @@ export class DetailPageController {
 		    location.reload();
 		};
 
+		document.querySelector("#submitEditListing").onclick = (event) => {
+			rhit.detailManager.editCurrentListing();
+			this.updateView();
+		    location.reload();
+		};
+
+		document.querySelector("#deleteListing").onclick = (event) => {
+			rhit.detailManager.deleteCurrentListing();
+			this.updateView();
+			window.history.back()
+		};
+
 		this.updateView();
 	}
 
@@ -39,9 +52,16 @@ class DetailManager {
 		this.listingID = listingID;
 	}
 
+	editCurrentListing = async function () {
+		
+	}
+
+	deleteCurrentListing = async function () {
+		await deleteListing(this.listingID)
+	}
+
 	closeCurrentListing = async function () {
 		let closeDate = new Date();
-		console.log(closeDate);
 		await closeListing(this.listingID, closeDate);
 	}
 

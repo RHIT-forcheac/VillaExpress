@@ -120,7 +120,7 @@ body {
 }
 
 #listingDetailsCard, #employeeDetailsCard, 
-#listingStatusCard, #clientDetailsCard {
+#listingStatusCard, #editDeleteCard {
     height: 14rem;
     width: 18rem;
 }
