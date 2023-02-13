@@ -138,6 +138,16 @@ export async function updateOffer(offerJson) {
     return response
 }
 
+export async function updateListing(listingID, address) {
+    const response = await fetch(`http://localhost:8090/api/listing/${listingID}/${address}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': '/*',
+        }
+    });
+    return response
+}
+
 export async function deleteClient(clientID) {
     const response = await fetch(`http://localhost:8090/api/client/${clientID}`, {
         method: 'DELETE',
