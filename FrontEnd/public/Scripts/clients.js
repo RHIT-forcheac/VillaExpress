@@ -41,9 +41,10 @@ export class ClientPageController {
 				Email: document.querySelector("#inputEmail").value,
 				Active: document.querySelector("#inputClientActive").value,
 			}
-			await rhit.clientManager.addClient(inputJson, rhit.employeeID);
-			rhit.clientManager.targetPage = null;
-			this.updateView();
+			await rhit.clientManager.addClient(inputJson, rhit.employeeID).then((params) => {
+				rhit.clientManager.targetPage = null;
+				this.updateView();
+			});
 		};
 
 		document.querySelector("#submitEditClient").onclick = async (event) => {
@@ -65,17 +66,18 @@ export class ClientPageController {
 				Email: document.querySelector("#inputNewEmail").value,
 				Active: document.querySelector("#inputNewClientActive").value,
 			}
-			await rhit.clientManager.editClientInfo(inputJson);
-			rhit.clientManager.targetPage = null;
-			this.updateView();
+			await rhit.clientManager.editClientInfo(inputJson).then((params) => {
+				rhit.clientManager.targetPage = null;
+				this.updateView();
+			});
 		};
 
 		document.querySelector("#submitDeleteClient").onclick = async (event) => {
 			let clientID = document.querySelector("#deleteClientDialogue").getAttribute("data-clientID");
-			let deleteStatus = await rhit.clientManager.deleteClient(clientID);
-			console.log(deleteStatus);
-			rhit.clientManager.targetPage = null;
-			this.updateView();
+			await rhit.clientManager.deleteClient(clientID).then((params) => {
+				rhit.clientManager.targetPage = null;
+				this.updateView();
+			});
 		};
 
 		document.querySelector("#beginningPage").onclick = (event) => {
@@ -190,6 +192,7 @@ class ClientManager {
 
 	addClient = async function (clientJson, employeeID) {
 		const addClientStatus = await addClient(clientJson, employeeID);
+		return addClientStatus;
 	};
 
 	getClients = async function (idFilter, fNameFilter, lNameFilter, activeFilter) {
@@ -333,11 +336,13 @@ class ClientManager {
 		}
 	};
 
-	editClientInfo(clientJson) {
-		updateClient(clientJson)
+	editClientInfo = async function(clientJson) {
+		const editClientStatus = updateClient(clientJson)
+		return editClientStatus;
 	}
 
-	deleteClient(clientID) {
-		deleteClient(clientID);
+	deleteClient = async function(clientID) {
+		const deleteClientStatus = deleteClient(clientID);
+		return deleteClientStatus;
 	}
 }
