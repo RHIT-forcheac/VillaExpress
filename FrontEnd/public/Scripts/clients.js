@@ -5,9 +5,13 @@ import {
 	getClients,
 	deleteClient,
 	updateClient,
+	getClientsForEmployee,
 } from "./apiFunctions.js"
 
+const urlParams = new URLSearchParams(window.location.search);
+
 rhit.clientManager = null;
+rhit.employeeID = urlParams.get("employeeID");
 
 export class ClientPageController {
 	constructor() {
@@ -112,7 +116,9 @@ class ClientManager {
 	};
 
 	getClients = async function () {
-		const clientsListJson = await getClients();
+		console.log("Emp id: ", rhit.employeeID);
+		const clientsListJson = await getClientsForEmployee(rhit.employeeID);
+		console.log(clientsListJson);
 		let tableBody = document.querySelector("#clientsTable");
 		this.jsonToTbl(clientsListJson, tableBody);
 		let table = document.querySelector("#clientsTable");

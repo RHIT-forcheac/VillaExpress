@@ -65,6 +65,13 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/clientEmployee/:employeeID').get((request, response) => {
+    Db.getClientsForEmployee(request.params.employeeID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
   router.route('/client/:clientID').delete((request, response) => {
     Db.deleteClient(request.params.clientID)
     .then((data) => {

@@ -67,6 +67,12 @@ export async function getClients() {
     return myJson
 }
 
+export async function getClientsForEmployee(employeeID) {
+    const response = await fetch(`http://localhost:8090/api/clientEmployee/${employeeID}`);
+    const myJson = await response.json();
+    return myJson
+}
+
 export async function addFirm(firmJSON) {
     const response = await fetch(`http://localhost:8090/api/firm`, {
         method: 'POST',
