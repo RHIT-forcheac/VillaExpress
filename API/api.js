@@ -211,8 +211,22 @@ router.use((request, response, next) => {
     })    
   })
 
-  router.route('/offer/:listingID').get((request, response) => {
-    Db.getOffersByListing(request.params.listingID)
+  router.route('/offer').get((request, response) => {
+    let orderID = request.query.orderID;
+    let orderPrice = request.query.orderPrice;
+    if (orderID == ''){
+      orderID = null;
+    }
+    else {
+      orderID = Number(orderID);
+    }
+    if (orderPrice == ''){
+      orderPrice = null;
+    }
+    else {
+      orderPrice = Number(orderPrice);
+    }
+    Db.getOffersByListing(request.query.listingID, orderID, orderPrice)
     .then((data) => {
       response.json(data[0]);
     })

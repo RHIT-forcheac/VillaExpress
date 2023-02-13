@@ -10,8 +10,12 @@ export async function getEmployeeByID(id) {
     return myJson
 }
 
-export async function getOffersByListing(listingId) {
-    const response = await fetch(`http://localhost:8090/api/offer/${listingId}`);
+export async function getOffersByListing(listingID, orderID, orderPrice) {
+    const response = await fetch(`http://localhost:8090/api/offer/?` + new URLSearchParams({
+        listingID: listingID,
+        orderID: orderID,
+        orderPrice: orderPrice
+    }));
     const myJson = await response.json();
     const finalJson = [];
     for (let i = 0; i < myJson.length; i  ++) {
