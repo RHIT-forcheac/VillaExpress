@@ -106,12 +106,17 @@ body {
     color: white;
 }
 
-#editIcon, .clientEditBtn, .offerEditBtn {
+#editIcon, .clientEditBtn, .offerEditBtn, .listingEditBtn {
     background-color: #36454F;
 }
 
-#deleteIcon, .clientDeleteBtn, .offerDeleteBtn {
+#deleteIcon, .clientDeleteBtn, .offerDeleteBtn, .listingDeleteBtn {
     background-color: red;
+}
+
+#editListing, #deleteListing {
+    height: 7rem;
+    width: 7rem;
 }
 
 #listingDetailsCard, #employeeDetailsCard, 
