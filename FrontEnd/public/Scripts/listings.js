@@ -104,7 +104,7 @@ class ListingPageManager {
 		newOffersButton.innerHTML = "Offers"
 
 		newOffersButton.onclick = ((event) => {
-			window.location.href = `../offers.html?listingID=${currentListing.ListingID}`;
+			window.location.href = `../offers.html?listingID=${currentListing.ListingID}&employeeID=${rhit.employeeID}`;
 		})
 
 		const newIconCounter = document.createElement("span");

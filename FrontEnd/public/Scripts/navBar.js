@@ -78,6 +78,7 @@ export function initializePage() {
 
 	if(document.querySelector("#clientsMainPage")){
 		console.log("You are on the clients page");
+		rhit.employeeID = urlParams.get("employeeID");
 		new NavBarController();
 		new ClientPageController();
 	}
@@ -85,12 +86,14 @@ export function initializePage() {
 	if(document.querySelector("#listingsPage")){
 		console.log("You are on the listings page");
 		const employeeID = urlParams.get("employeeID");
+		rhit.employeeID = employeeID;
 		new NavBarController();
 		new ListingPageController(employeeID);
 	}
 
 	if(document.querySelector("#firmPage")){
 		console.log("You are on the firm page");
+		rhit.employeeID = urlParams.get("employeeID");
 		new NavBarController();
 		//TODO: Add firm controller when page is finished
 		//new ClientPageController();
@@ -98,6 +101,7 @@ export function initializePage() {
 
 	if(document.querySelector("#offersPage")){
 		console.log("You are on the offers page");
+		rhit.employeeID = urlParams.get("employeeID");
 		const listingID = urlParams.get("listingID");
 		new NavBarController();
 		new OfferPageController(listingID);
@@ -105,6 +109,7 @@ export function initializePage() {
 
 	if(document.querySelector("#detailPage")){
 		console.log("You are on the details page");
+		rhit.employeeID = urlParams.get("employeeID");
 		const listingID = urlParams.get("listingID");
 		new NavBarController();
 		new DetailPageController(listingID);
