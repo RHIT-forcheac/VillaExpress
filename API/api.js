@@ -127,7 +127,7 @@ router.use((request, response, next) => {
 
   router.route('/listing').post((request, response) => {
     let listingJSON = request.body;
-    Db.addListing(listingJSON.EmployeeID, listingJSON.PostDate, listingJSON.Address)
+    Db.addListing(listingJSON.EmployeeId, listingJSON.PostDate, listingJSON.Address)
     .then((data) => {
       response.json(data[0]);
     })
