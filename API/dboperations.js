@@ -107,10 +107,77 @@ function hashPassword(password, salt) {
     return bcrypt.hashSync(password, salt);
 }
 
+async function addFirm(CompanyName, Address) {
+    try{
+        let pool = await sql.connect(config);
+        let newFirm = await pool.request()
+                .input('CompName', sql.VarChar, CompanyName)
+                .input('Address', sql.VarChar, Address)
+                .execute('addFirm');
+            return newFirm.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function deleteFirm(firmID) {
+    try {
+        let pool = await sql.connect(config);
+        let firmDeleted = await pool.request()
+            .input('firmID', sql.Int, firmID)
+            .execute('deleteFirm');
+        return firmDeleted.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function getFirm(employeeID) {
+    try {
+        let pool = await sql.connect(config);
+        let firmSelection = await pool.request()
+            .input('employeeID', sql.Int, employeeID)
+            .execute('getFirmFromEmployeeID');
+        return firmSelection.recordsets;
+    } catch (err) {        
+        console.log(err);
+    }
+}
+
+async function addEmployeeToFirm(employeeID, firmID) {
+    try {
+        let pool = await sql.connect(config);
+        let employeeToFirm = await pool.request()
+                .input('employeeID', sql.Int, employeeID)
+                .input('firmID', sql.Int, firmID)
+                .execute('addEmployeeToFirm');
+            return employeeToFirm.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function checkAdminAccess(employeeID) {
+    try {
+        let pool = await sql.connect(config);
+        let adminAccess = await pool.request()
+                .input('employeeID', sql.Int, employeeID)
+                .execute('checkAdminAccess');
+            return adminAccess.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     registerNewUser: registerNewUser,
     loginUser: loginUser,
     addClient: addClient,
     getClients: getClients,
     deleteClient: deleteClient,
+    addFirm: addFirm,
+    deleteFirm: deleteFirm,
+    getFirm: getFirm,
+    addEmployeeToFirm: addEmployeeToFirm,
+    checkAdminAccess: checkAdminAccess,
 }

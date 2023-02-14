@@ -6,10 +6,16 @@ import {
 	addClient,
 	getClients,
 	deleteClient,
+	addFirm, 
+	getFirm, 
+	deleteFirm, 
+	addEmployeeToFirm,
+	checkAdminAccess,
 } from "./apiFunctions.js"
 
 rhit.loginRegesterManager = null;
 rhit.clientManager = null;
+rhit.firmManager = null;
 
 rhit.LoginPageController = class {
 	constructor() {
@@ -260,11 +266,49 @@ rhit.ClientManager = class {
 	// }
 }
 
+rhit.FirmPageController = class {
+	constructor() {
+		document.querySelector("#submitAddFirm").onclick = (event) => {
+			const inputJSON = {
+				companyName: document.querySelector("#CompanyName").value,
+				address: document.querySelector("#CompanyAddress").value
+			}
+			rhit.firmManager.addFirm(inputJSON);
+			this.updateView();
+		};
+		document.querySelector("#submitDeleteFirm").onclick = (event) => {
+			//TODO: Delete Firm Button
+		}
+		this.updateView();
+	}
+
+	updateView() {
+		rhit.firmManager.getFirm();
+	}
+}
+
+rhit.FirmManager = class {
+	constructor() {
+
+	};
+
+	addFirm = async function (firmJSON) {
+		const addFirmStatus = await addFirm(firmJSON);
+		console.log("firm add status: ", addFirmStatus);
+	};
+
+	getFirm = async function (employeeID) {
+		//TODO: Get Firm from employeeID
+	}
+}
+
 rhit.main = function () {
 	console.log("Ready");
 	// rhit.loginRegesterManager = new rhit.LoginRegisterManager();
 	// new rhit.LoginPageController();
 	new rhit.ClientPageController();
+	new rhit.FirmPageController();
+	rhit.firmManager = new rhit.FirmManager();
 };
 
 rhit.main();

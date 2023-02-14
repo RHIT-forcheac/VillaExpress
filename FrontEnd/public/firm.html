@@ -52,6 +52,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="addFirm">
+                <button id="addFirmBtn" type="button" class="btn" data-toggle="modal"
+                    data-target="#addFirmModal">Add Firm</button>
+            </div>
+
+            <div class="deleteFirm">
+                <button id="submitDeleteFirm" type="button" class="btn">Delete Firm</button>
+            </div>
+
             <!-- <div class="col">
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="./images/testFirmImage.png" alt="firm">
@@ -90,7 +100,28 @@
             </div> -->
         </div>
         
+        <div class="modal fade" id="addFirmModal" tabindex="-1" role="dialog" aria-labelledby="Add Firm dialog"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="addFirmModal">
+              <div class="modal-header d-block">
+                <h5 class="modal-title text-center" id="addFirmModal">Add Firm</h5>
+              </div>
+              <div class="modal-body d-block text-center">
+                <input type="text" id="CompanyName" placeholder="Company Name">
+                <input type="text" id="CompanyAddress" placeholder="Company Address">
+              </div>
+              <div class="modal-footer">
+                <button id="submitAddFirm" type="button" class="btn" data-dismiss="modal">Add Firm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/popper.js"></script>
     <script src="scripts/bootstrap-material-design.js"></script>
