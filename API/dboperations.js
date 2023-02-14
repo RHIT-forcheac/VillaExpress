@@ -422,6 +422,20 @@ async function insertRepresent(client, employee) {
 
 
 
+async function updateFirm(FirmID, CompanyName, Address) {
+    try {
+        let pool = await sql.connect(config);
+        let updatedFirm = await pool.request()
+            .input('ID', sql.Int, FirmID)
+            .input('CompanyName', sql.VarChar, CompanyName)
+            .input('Address', sql.VarChar, Address)
+            .execute('updateFirm');
+        return updatedFirm.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 async function addFirm(CompanyName, Address) {
     try{
         let pool = await sql.connect(config);
@@ -501,6 +515,12 @@ module.exports = {
     updateOffer: updateOffer,
     updateListing: updateListing,
     deleteClient: deleteClient,
+    deleteListing: deleteListing,
+    deleteOffer: deleteOffer,
+    closeListing: closeListing,
+    registerNewUser: registerNewUser,
+    loginUser: loginUser,
+    updateFirm: updateFirm,
     addFirm: addFirm,
     deleteFirm: deleteFirm,
     getFirm: getFirm,

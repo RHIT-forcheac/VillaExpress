@@ -167,6 +167,16 @@ export async function updateListing(listingID, address) {
     return response
 }
 
+export async function updateFirm(firmID, CompanyName, Address) {
+    const response = await fetch(`http://localhost:8090/api/firm/${firmID}/${CompanyName}/${Address}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': '/*',
+        }
+    });
+    return response
+}
+
 export async function deleteClient(clientID) {
     const response = await fetch(`http://localhost:8090/api/client/${clientID}`, {
         method: 'DELETE',

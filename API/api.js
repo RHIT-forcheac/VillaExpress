@@ -263,3 +263,45 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/firm/:firmID/:CompanyName/:Address').put((request, response) => {
+      Db.updateFirm(request.params.firmID, request.params.CompanyName, request.params.Address)
+      .then((data) => {
+        response.json(data[0]);        
+      })
+  })
+
+  router.route('/firm').post((request, response) => {
+    let firmJSON = request.body;
+    Db.addFirm(firm.JSON.CompanyName, firmJSON.Address)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/firm/:firmID').delete((request, response) => {
+    Db.deleteFirm(request.params.firmID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/firm/:employeeID').get((request, response) => {
+    Db.getFirm(request.params.employeeID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
+
+  router.route('/firm/:employeeID/:firmID').post((request, response) => {
+    Db.addEmployeeToFirm(request.params.employeeID, request.params.firmID)
+    .then((data) => {
+      response.json(data[0]);
+    })  
+  })
+
+  router.route('/:employeeID').get((request, response) => {
+    Db.checkAdminAccess(request.params.employeeID)
+    .then((data) => {
+      response.json(data[0]);
+    })
+  })
