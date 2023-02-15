@@ -60,6 +60,9 @@ router.use((request, response, next) => {
     .then((data) => {
       response.json(data[0]);
     })
+    .catch((error) => {
+      response.send(error);
+    })
   })
 
   router.route('/clientEmployee').get((request, response) => {
