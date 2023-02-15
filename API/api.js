@@ -25,11 +25,8 @@ router.use((request, response, next) => {
   });
    
    
-//   router.route('/employee').get((request, response) => {
-//     Db.getEmployees().then((data) => {
-//       response.json(data[0]);
-//     })
-//   })
+  router.route('/').get((request, response) => {
+    response.send("Test to see if render is working besides db")})
   
   router.route('/employee').get((request, response) => {
     Db.getEmployeeByID(request.query.id).then((data) => {
