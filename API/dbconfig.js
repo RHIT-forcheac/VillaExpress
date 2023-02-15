@@ -4,8 +4,9 @@ const  config = {
     server: 'titan.csse.rose-hulman.edu',
     database: 'VillaExpress',
     options: {
-      trustedconnection:  true,
-      //enableArithAbort:  true,
+      "trustedconnection":  true,
+      "enableArithAbort":  true,
+      "encrypt": true
       //instancename:  'SQLEXPRESS'  // SQL Server instance name
     },
    // port:  55892
