@@ -61,7 +61,7 @@ router.use((request, response, next) => {
       response.json(data[0]);
     })
     .catch((error) => {
-      response.send(error);
+      console.error(error);
     })
   })
 
