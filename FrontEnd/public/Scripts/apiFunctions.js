@@ -167,16 +167,6 @@ export async function updateListing(listingID, address) {
     return response
 }
 
-export async function updateFirm(firmID, CompanyName, Address) {
-    const response = await fetch(`http://localhost:8090/api/firm/${firmID}/${CompanyName}/${Address}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': '/*',
-        }
-    });
-    return response
-}
-
 export async function deleteClient(clientID) {
     const response = await fetch(`http://localhost:8090/api/client/${clientID}`, {
         method: 'DELETE',
@@ -188,30 +178,30 @@ export async function deleteClient(clientID) {
     return response
 }
 
-export async function getClientByID(clientID) {
-    const response = await fetch(`http://localhost:8090/api/client/${clientID}`);
-    const myJson = await response.json();
-    return myJson
-}
+// export async function getClientByID(clientID) {
+//     const response = await fetch(`http://localhost:8090/api/client/${clientID}`);
+//     const myJson = await response.json();
+//     return myJson
+// }
 
-export async function getClients() {
-    const response = await fetch(`http://localhost:8090/api/client`);
-    const myJson = await response.json();
-    return myJson
-}
+// export async function getClients() {
+//     const response = await fetch(`http://localhost:8090/api/client`);
+//     const myJson = await response.json();
+//     return myJson
+// }
 
-export async function addFirm(firmJson) {
-    const response = await fetch(`http://localhost:8090/api/firm`, {
-        method: 'POST',
-        headers: {
-            'Accept': '/*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(firmJson),
-    });
-    const myJson = await response.json();
-    return myJson
-}
+// export async function addFirm(firmJson) {
+//     const response = await fetch(`http://localhost:8090/api/firm`, {
+//         method: 'POST',
+//         headers: {
+//             'Accept': '/*',
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(firmJson),
+//     });
+//     const myJson = await response.json();
+//     return myJson
+// }
 
 export async function deleteFirm(firmID) {
     const response = await fetch(`http://localhost:8090/api/firm/${firmID}`, {
@@ -224,11 +214,11 @@ export async function deleteFirm(firmID) {
     return myJson
 }
 
-export async function getFirm(employeeID) {
-    const response = await fetch(`http://localhost:8090/api/firm/${employeeID}`); 
-    const myJson = await response.json();
-    return myJson
-}
+// export async function getFirm(employeeID) {
+//     const response = await fetch(`http://localhost:8090/api/firm/${employeeID}`); 
+//     const myJson = await response.json();
+//     return myJson
+// }
 
 export async function addEmployeeToFirm(employeeID, firmID) {
     const response = await fetch(`http://localhost:8090/api/firm/${employeeID}/${firmID}`);
@@ -242,18 +232,18 @@ export async function checkAdminAccess(employeeID) {
     return myJSON
 }
 
-export async function addListing(listingJSON) {
-    const response = await fetch(`http://localhost:8090/api/listing`, {
-        method: 'POST',
-        headers: {
-            'Accept': '/*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(listingJSON),
-    });
-    const myJson = await response.json();
-    return myJson
-}
+// export async function addListing(listingJSON) {
+//     const response = await fetch(`http://localhost:8090/api/listing`, {
+//         method: 'POST',
+//         headers: {
+//             'Accept': '/*',
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(listingJSON),
+//     });
+//     const myJson = await response.json();
+//     return myJson
+// }
 
 export async function deleteListing(listingID) {
     const response = await fetch(`http://localhost:8090/api/listing/${listingID}`, {
@@ -276,16 +266,16 @@ export async function deleteOffer(offerID) {
     return response
 }
 
-export async function deleteFirm(firmID) {
-    const response = await fetch(`http://localhost:8090/api/firm/${firmID}`, {
-        method: 'DELETE',
-        headers: {
-            'Accept': '/*',
-        },
-    });
-    const myJson = await response.json();
-    return myJson
-}
+// export async function deleteFirm(firmID) {
+//     const response = await fetch(`http://localhost:8090/api/firm/${firmID}`, {
+//         method: 'DELETE',
+//         headers: {
+//             'Accept': '/*',
+//         },
+//     });
+//     const myJson = await response.json();
+//     return myJson
+// }
 
 export async function closeListing(listingID, closeDate) {
     const response = await fetch(`http://localhost:8090/api/closeListing/${listingID}&${closeDate}`, {

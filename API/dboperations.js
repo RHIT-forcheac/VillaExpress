@@ -189,6 +189,7 @@ async function updateClient(clientID, fName, lName, dob, phoneNumber, address, e
             .input('active', sql.Bit, active)
             .execute('updateClient');
         return newClient.recordsets;
+    } catch (err) {
         console.log(err);
     }
 }
@@ -534,7 +535,7 @@ module.exports = {
     deleteOffer: deleteOffer,
     closeListing: closeListing,
     registerNewUser: registerNewUser,
-    loginUser: loginUser,,
+    loginUser: loginUser,
     insertFirm: insertFirm,
     insertEmployee: insertEmployee,
     insertListing: insertListing,
